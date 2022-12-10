@@ -198,11 +198,11 @@ Part 1b - Step 2: Assignment
 
 Thing 1) cat
 5 properties:
-    1) number of limbs
-    2) number of tails
-    3) age
-    4) colour
-    5) weight
+    1) number of limbs (int)
+    2) number of tails (int)
+    3) age (float)
+    4) colour (std::string)
+    5) weight (float)
 3 things it can do:
     1) meow
     2) catch small animals
@@ -210,11 +210,11 @@ Thing 1) cat
 
 Thing 2) vending machine
 5 properties:
-    1) inventory
-    2) interior temperature
-    3) target temperature
-    4) cash collected
-    5) item selected
+    1) inventory (int)
+    2) interior temperature (float)
+    3) target temperature (float)
+    4) cash collected (float)
+    5) item selected (int)
 3 things it can do:
     1) charge customer
     2) dispense product
@@ -222,11 +222,11 @@ Thing 2) vending machine
 
 Thing 3) computer
 5 properties:
-    1) number of CPU cores
-    2) CPU frequency
-    3) amount of memory
-    4) power needed
-    5) operating system
+    1) number of CPU cores (int)
+    2) CPU frequency (GHz) (float)
+    3) amount of memory (int)
+    4) power needed (W) (int)
+    5) operating system (std::string)
 3 things it can do:
     1) boot up
     2) run an program
@@ -234,11 +234,11 @@ Thing 3) computer
 
 Thing 4) motorcycle
 5 properties:
-    1) brand
-    2) model
-    3) colour
-    4) engine power
-    5) number of cylinders
+    1) brand (std:string)
+    2) model (std::string)
+    3) colour (std:string)
+    4) engine power (Hp) (int)
+    5) number of cylinders (int)
 3 things it can do:
     1) accelerate
     2) break
