@@ -83,51 +83,51 @@ Main Object: Car Interior
         Name 4 nouns you'll find on the [Sub Object]
             1) paddle shifters
             2) 'cruise control' controls
-            3) 
-            4) 
+            3) horn
+            4) infotainment controls
         Name 2 actions that the [Sub Object] can do:
             1) adjust cruise control settings.
-            2)
+            2) sound horn
         
     Sub Object: Instrument Cluster
         Name 4 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
-            4)
+            1) speedometer
+            2) tachometer
+            3) gas gauge
+            4) odometer
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) display speed
+            2) display rpm
+            3) warn of empty tank
     
     Sub Object: Environment Controls
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) temperature control
+            2) fan power control
+            3) defrost control
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) heat
+            2) increase fan power
+            3) defrost windshield
 
     Sub Object: Infotainment System
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) volume button
+            2) source selection button
+            3) preset button
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) increase volume
+            2) choose source
+            3) choose preset
 
     Sub Object: Seat 
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) cushion
+            2) headrest
+            3) backrest
         Name 2 actions that the [Sub Object] can do:
-            1)
-            2)
+            1) incline
+            2) heat
 */
 
 /*
