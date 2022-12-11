@@ -436,11 +436,11 @@ example:
 
 Thing 5) turntable
 5 properties:
-    1) platter rotation speed (rpm)
-    2) tonearm counterweight (g)
-    3) motor voltage (V)
-    4) stylus movement (um)
-    5) speed selection (rpm)
+    1) platter rotation speed (rpm) (int)
+    2) tonearm counterweight (g) (float)
+    3) motor voltage (V) (double)
+    4) stylus movement (um) (float)
+    5) speed selection (rpm) (int)
 3 things it can do:
     1) change rotating speed
     2) rotate vinyl disk
@@ -448,11 +448,11 @@ Thing 5) turntable
 
 Thing 6) cassette deck
 5 properties:
-    1) cassette compartment open
-    2) take up reel speed (rmp)
-    3) play/rec head voltage (V)
-    4) control button pressed 
-    5) counter
+    1) cassette compartment open (bool)
+    2) take up reel speed (rpm) (float)
+    3) play/rec head voltage (V) (double)
+    4) control button pressed (std::string)
+    5) counter (int)
 3 things it can do:
     1) read magnetic information 
     2) rotate reel
@@ -460,11 +460,11 @@ Thing 6) cassette deck
 
 Thing 7) amplifier
 5 properties:
-    1) volume button value
-    2) signal input voltage (V)
-    3) speaker outputs voltage (V)
-    4) source selected
-    5) equalizer preset
+    1) volume button value (float)
+    2) signal input voltage (V) (double)
+    3) speaker outputs voltage (V) (double)
+    4) source selected (std::string)
+    5) equalizer preset (std::string)
 3 things it can do:
     1) change volume
     2) output sound
@@ -472,11 +472,11 @@ Thing 7) amplifier
 
 Thing 8) tuner
 5 properties:
-    1) band selected
-    2) tuning knob angle (radians)
-    3) preset button pressed
-    4) dial position (mm)
-    5) antenna signal input (mV)
+    1) band selected (std::string)
+    2) tuning knob angle (radians) (float)
+    3) preset button pressed (std::string)
+    4) dial position (mm) (float)
+    5) antenna signal input (mV) (double)
 3 things it can do:
     1) select band
     2) change tuning
@@ -484,11 +484,11 @@ Thing 8) tuner
 
 Thing 9) speaker
 5 properties:
-    1) bass driver voltage (V)
-    2) bass cone displacement (mm)
-    3) treeble driver voltage (V)
-    4) treeble cone displacement (mm)
-    5) vent exhaust pressure
+    1) bass driver voltage (V) (double)
+    2) bass cone displacement (mm) (float)
+    3) treeble driver voltage (V) (double)
+    4) treeble cone displacement (mm) (float)
+    5) vent exhaust pressure (float)
 3 things it can do:
     1) process signal
     2) emit sound
