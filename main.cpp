@@ -340,10 +340,10 @@ Define an object that is made of 5 sub-objects.
 Thing 10) stereo
 5 properties:
     1) turntable
-    2) tape player
+    2) cassette deck
     3) amplifier
     4) tuner
-    5) speakers
+    5) speaker
 3 things it can do:
     1) play music
     2) change radio channel
@@ -434,65 +434,65 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
+Thing 5) turntable
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) platter rotation speed (rpm)
+    2) tonearm counterweight (g)
+    3) motor voltage (V)
+    4) stylus movement (um)
+    5) speed selection (rpm)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change rotating speed
+    2) rotate vinyl disk
+    3) output groove amplitude
 
-Thing 6)
+Thing 6) cassette deck
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) cassette compartment open
+    2) take up reel speed (rmp)
+    3) play/rec head voltage (V)
+    4) control button pressed 
+    5) counter
 3 things it can do:
-    1)
-    2)
-    3)
+    1) read magnetic information 
+    2) rotate reel
+    3) reverse direction
 
-Thing 7)
+Thing 7) amplifier
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) volume button value
+    2) signal input voltage (V)
+    3) speaker outputs voltage (V)
+    4) source selected
+    5) equalizer preset
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change volume
+    2) output sound
+    3) change source
 
-Thing 8)
+Thing 8) tuner
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) band selected
+    2) tuning knob angle (radians)
+    3) preset button pressed
+    4) dial position (mm)
+    5) antenna signal input (mV)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) select band
+    2) change tuning
+    3) light up
 
-Thing 9)
+Thing 9) speaker
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) bass driver voltage (V)
+    2) bass cone displacement (mm)
+    3) treeble driver voltage (V)
+    4) treeble cone displacement (mm)
+    5) vent exhaust pressure
 3 things it can do:
-    1)
-    2)
-    3)
+    1) process signal
+    2) emit sound
+    3) blow
  */
 
 /*
