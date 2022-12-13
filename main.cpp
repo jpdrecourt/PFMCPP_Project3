@@ -445,7 +445,15 @@ Thing 1) cat
 */
 struct Cat
 {
-
+    //     1) number of limbs (int)
+    //     2) number of tails (int)
+    //     3) age (float)
+    //     4) colour (std::string)
+    //     5) weight (float)
+    // 3 things it can do:
+    //     1) meow
+    //     2) catch small animals
+    //     3) throw up fur balls
 };
 /*
 Thing 2) vending machine
@@ -462,7 +470,16 @@ Thing 2) vending machine
 */
 struct VendingMachine
 {
-
+    // 5 properties:
+    //     1) inventory (int)
+    //     2) interior temperature (float)
+    //     3) target temperature (float)
+    //     4) cash collected (float)
+    //     5) item selected (int)
+    // 3 things it can do:
+    //     1) charge customer
+    //     2) dispense product
+    //     3) refrigerate products
 };
 /*
 Thing 3) computer
@@ -479,7 +496,16 @@ Thing 3) computer
 */
 struct Computer
 {
-
+    // 5 properties:
+    //     1) number of CPU cores (int)
+    //     2) CPU frequency (GHz) (float)
+    //     3) amount of memory (int)
+    //     4) power needed (W) (int)
+    //     5) operating system (std::string)
+    // 3 things it can do:
+    //     1) boot up
+    //     2) run an program
+    //     3) crash
 };
 /*
 Thing 4) motorcycle
@@ -496,7 +522,16 @@ Thing 4) motorcycle
 */
 struct Motorcycle
 {
-
+    // 5 properties:
+    //     1) brand (std:string)
+    //     2) model (std::string)
+    //     3) colour (std:string)
+    //     4) engine power (Hp) (int)
+    //     5) number of cylinders (int)
+    // 3 things it can do:
+    //     1) accelerate
+    //     2) break
+    //     3) make a wheelie
 };
 /*
 Thing 5) turntable
@@ -513,7 +548,16 @@ Thing 5) turntable
 */
 struct Turntable
 {
-
+    // 5 properties:
+    //     1) platter rotation speed (rpm) (int)
+    //     2) tonearm counterweight (g) (float)
+    //     3) motor voltage (V) (double)
+    //     4) stylus movement (um) (float)
+    //     5) speed selection (rpm) (int)
+    // 3 things it can do:
+    //     1) change rotating speed
+    //     2) rotate vinyl disk
+    //     3) output groove amplitude
 };
 /*
 Thing 6) cassette deck
@@ -530,7 +574,16 @@ Thing 6) cassette deck
 */
 struct CassetteDeck
 {
-
+    // 5 properties:
+    //     1) cassette compartment open (bool)
+    //     2) take up reel speed (rpm) (float)
+    //     3) play/rec head voltage (V) (double)
+    //     4) control button pressed (std::string)
+    //     5) counter (int)
+    // 3 things it can do:
+    //     1) read magnetic information 
+    //     2) rotate reel
+    //     3) reverse direction
 };
 /*
 Thing 7) amplifier
@@ -547,7 +600,16 @@ Thing 7) amplifier
 */
 struct Amplifier
 {
-
+    // 5 properties:
+    //     1) volume button value (float)
+    //     2) signal input voltage (V) (double)
+    //     3) speaker outputs voltage (V) (double)
+    //     4) source selected (std::string)
+    //     5) equalizer preset (std::string)
+    // 3 things it can do:
+    //     1) change volume
+    //     2) output sound
+    //     3) change source
 };
 /*
 Thing 8) tuner
@@ -564,7 +626,16 @@ Thing 8) tuner
 */
 struct Tuner
 {
-
+    // 5 properties:
+    //     1) band selected (std::string)
+    //     2) tuning knob angle (radians) (float)
+    //     3) preset button pressed (std::string)
+    //     4) dial position (mm) (float)
+    //     5) antenna signal input (mV) (double)
+    // 3 things it can do:
+    //     1) select band
+    //     2) change tuning
+    //     3) light up
 };
 /*
 Thing 9) speaker
@@ -581,7 +652,16 @@ Thing 9) speaker
 */
 struct Speaker
 {
-
+    // 5 properties:
+    //     1) bass driver voltage (V) (double)
+    //     2) bass cone displacement (mm) (float)
+    //     3) treeble driver voltage (V) (double)
+    //     4) treeble cone displacement (mm) (float)
+    //     5) vent exhaust pressure (float)
+    // 3 things it can do:
+    //     1) process signal
+    //     2) emit sound
+    //     3) blow
 };
 /*
 Thing 10) stereo
@@ -598,7 +678,16 @@ Thing 10) stereo
 */
 struct Stereo
 {
-
+    // 5 properties:
+    //     1) turntable
+    //     2) cassette deck
+    //     3) amplifier
+    //     4) tuner
+    //     5) speaker
+    // 3 things it can do:
+    //     1) play music
+    //     2) change radio channel
+    //     3) copy tape
 };
 /*
 =================
