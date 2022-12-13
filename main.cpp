@@ -442,7 +442,12 @@ Thing 1) cat
     1) meow
     2) catch small animals
     3) throw up fur balls
+*/
+struct Cat
+{
 
+};
+/*
 Thing 2) vending machine
 5 properties:
     1) inventory (int)
@@ -454,7 +459,12 @@ Thing 2) vending machine
     1) charge customer
     2) dispense product
     3) refrigerate products
+*/
+struct VendingMachine
+{
 
+};
+/*
 Thing 3) computer
 5 properties:
     1) number of CPU cores (int)
@@ -466,7 +476,12 @@ Thing 3) computer
     1) boot up
     2) run an program
     3) crash
+*/
+struct Computer
+{
 
+};
+/*
 Thing 4) motorcycle
 5 properties:
     1) brand (std:string)
@@ -478,7 +493,12 @@ Thing 4) motorcycle
     1) accelerate
     2) break
     3) make a wheelie
+*/
+struct Motorcycle
+{
 
+};
+/*
 Thing 5) turntable
 5 properties:
     1) platter rotation speed (rpm) (int)
@@ -490,7 +510,12 @@ Thing 5) turntable
     1) change rotating speed
     2) rotate vinyl disk
     3) output groove amplitude
+*/
+struct Turntable
+{
 
+};
+/*
 Thing 6) cassette deck
 5 properties:
     1) cassette compartment open (bool)
@@ -502,7 +527,12 @@ Thing 6) cassette deck
     1) read magnetic information 
     2) rotate reel
     3) reverse direction
+*/
+struct CassetteDeck
+{
 
+};
+/*
 Thing 7) amplifier
 5 properties:
     1) volume button value (float)
@@ -514,7 +544,12 @@ Thing 7) amplifier
     1) change volume
     2) output sound
     3) change source
+*/
+struct Amplifier
+{
 
+};
+/*
 Thing 8) tuner
 5 properties:
     1) band selected (std::string)
@@ -526,7 +561,12 @@ Thing 8) tuner
     1) select band
     2) change tuning
     3) light up
+*/
+struct Tuner
+{
 
+};
+/*
 Thing 9) speaker
 5 properties:
     1) bass driver voltage (V) (double)
@@ -538,7 +578,12 @@ Thing 9) speaker
     1) process signal
     2) emit sound
     3) blow
+*/
+struct Speaker
+{
 
+};
+/*
 Thing 10) stereo
 5 properties:
     1) turntable
@@ -550,9 +595,11 @@ Thing 10) stereo
     1) play music
     2) change radio channel
     3) copy tape
-
 */
+struct Stereo
+{
 
+};
 /*
 =================
 Part 1d - Step 7: Commit
