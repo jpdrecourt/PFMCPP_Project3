@@ -492,6 +492,21 @@ struct VendingMachine
     // item selected
     int itemSelected = 13;
 
+    struct ItemDispenser
+    {
+        std::string name = "KitKat";
+        std::string flavour = "Original";
+        int inventory = 5;
+        float priceEuros = 2.5f;
+        int itemNumber = 13;
+
+        bool distributeItems(int numberOfItems); // returns true if item successfully distributed
+
+        int updateInventory(int itemAdded); // returns the new inventory
+
+        bool disable(std::string cause); // return true if the dispenser is disabled
+    };
+
     // 3 things it can do:
     // charge customer for an item
     float chargeCustomerEuros(int item); // returns the price for the item
@@ -537,6 +552,20 @@ struct Computer
 
     // crash
     void crash();
+
+    struct HardDrive {
+        std::string brand = "Seagate";
+        float capacityGB = 2000.0f;
+        int standardRpm = 7200;
+        float readSpeedMBs = 101.1f;
+        float writeSpeedMs = 74.2f;
+
+        int readData(int address); // returns the value at that address
+        
+        bool writeData(int address, int data); // return true if the write succeeded
+
+        bool parkHeads(); // return true if the heads are parked
+    };
 };
 /*
 Thing 4) motorcycle
@@ -751,7 +780,6 @@ struct Speaker
     
     // blow
     void blow(float driverCurrent);
-11
 };
 /*
 Thing 10) stereo
@@ -781,13 +809,13 @@ struct Stereo
 
     // 3 things it can do:
     // play music
-    bool playMusic(std::string source) // returns true if music can be played from source
+    bool playMusic(std::string source); // returns true if music can be played from source
 
     // change radio channel
-    bool changeRadioChannel(std::string newRadioChannel) // returns true if change is successful
+    bool changeRadioChannel(std::string newRadioChannel); // returns true if change is successful
 
     // record tape
-    bool recordTape(std::string inputSource) // returns true if the source can be recorded
+    bool recordTape(std::string inputSource); // returns true if the source can be recorded
 };
 /*
 =================
