@@ -445,11 +445,11 @@ Thing 1) cat
 */
 struct Cat
 {
-    //     1) number of limbs (int)
-    //     2) number of tails (int)
-    //     3) age (float)
-    //     4) colour (std::string)
-    //     5) weight (float)
+    int numLimbs = 3;
+    int numTails = 1;
+    float ageYears = 3.6f;
+    std::string colour = "orange";
+    float weightKg = 4.1f;
     // 3 things it can do:
     //     1) meow
     //     2) catch small animals
@@ -470,12 +470,11 @@ Thing 2) vending machine
 */
 struct VendingMachine
 {
-    // 5 properties:
-    //     1) inventory (int)
-    //     2) interior temperature (float)
-    //     3) target temperature (float)
-    //     4) cash collected (float)
-    //     5) item selected (int)
+    int inventory = 42;
+    float interiorTemperatureCelsius = 10.2f;
+    float targetTemperatureCelsius = 8.5f;
+    float cashCollectedEuros = 123.54f;
+    int itemSelected = 13;
     // 3 things it can do:
     //     1) charge customer
     //     2) dispense product
@@ -496,12 +495,11 @@ Thing 3) computer
 */
 struct Computer
 {
-    // 5 properties:
-    //     1) number of CPU cores (int)
-    //     2) CPU frequency (GHz) (float)
-    //     3) amount of memory (int)
-    //     4) power needed (W) (int)
-    //     5) operating system (std::string)
+    int numCPUCores = 6;
+    float CPUFrequencyGHz = 3.4f;
+    int memoryMB = 32;
+    int powerNeededW = 430;
+    std::string operatingSystem = "Solaris";
     // 3 things it can do:
     //     1) boot up
     //     2) run an program
@@ -522,12 +520,11 @@ Thing 4) motorcycle
 */
 struct Motorcycle
 {
-    // 5 properties:
-    //     1) brand (std:string)
-    //     2) model (std::string)
-    //     3) colour (std:string)
-    //     4) engine power (Hp) (int)
-    //     5) number of cylinders (int)
+    std::string brand = "Harley Davidson";
+    std::string model = "2022 Heritage Classic";
+    std::string colour = "Pink";
+    int enginePowerHp = 101;
+    int numCylinders = 2;
     // 3 things it can do:
     //     1) accelerate
     //     2) break
@@ -548,12 +545,11 @@ Thing 5) turntable
 */
 struct Turntable
 {
-    // 5 properties:
-    //     1) platter rotation speed (rpm) (int)
-    //     2) tonearm counterweight (g) (float)
-    //     3) motor voltage (V) (double)
-    //     4) stylus movement (um) (float)
-    //     5) speed selection (rpm) (int)
+    float platterRpm = 32.9f;
+    float tonearmCounterweightGrams = 160.0f;
+    double motorVoltageVolts = 9.2345;
+    float stylusMouvementMicrometers = 2.5f;
+    int speedSelection = 33;
     // 3 things it can do:
     //     1) change rotating speed
     //     2) rotate vinyl disk
@@ -574,12 +570,11 @@ Thing 6) cassette deck
 */
 struct CassetteDeck
 {
-    // 5 properties:
-    //     1) cassette compartment open (bool)
-    //     2) take up reel speed (rpm) (float)
-    //     3) play/rec head voltage (V) (double)
-    //     4) control button pressed (std::string)
-    //     5) counter (int)
+    bool isCompartmentOpen = false;
+    float tapeSpeedCmPerSecond = 4.76f;
+    double playRecHeadCurrentMilliAmps = 0.83;
+    std::string controlButtonPressed = "Play";
+    int counter = 354;
     // 3 things it can do:
     //     1) read magnetic information 
     //     2) rotate reel
@@ -600,12 +595,11 @@ Thing 7) amplifier
 */
 struct Amplifier
 {
-    // 5 properties:
-    //     1) volume button value (float)
-    //     2) signal input voltage (V) (double)
-    //     3) speaker outputs voltage (V) (double)
-    //     4) source selected (std::string)
-    //     5) equalizer preset (std::string)
+    float volumeButtonValue = 11.1f;
+    double signalInputVoltageVolts = 0.0;
+    double speakerOutputVoltageVolts = 0.0;
+    std::string sourceSelected = "turntable";
+    std::string equalizerPreset = "jazz";
     // 3 things it can do:
     //     1) change volume
     //     2) output sound
@@ -626,6 +620,11 @@ Thing 8) tuner
 */
 struct Tuner
 {
+    std::string bandSelected = "FM";
+    float tuningKnobAngleRadians = 1.234f;
+    std::string presetButtonPressed = "none";
+    float dialPositionMillimeters = 15.3f;
+    double antennaSignalInputMillivolts = 0.132;
     // 5 properties:
     //     1) band selected (std::string)
     //     2) tuning knob angle (radians) (float)
@@ -652,12 +651,11 @@ Thing 9) speaker
 */
 struct Speaker
 {
-    // 5 properties:
-    //     1) bass driver voltage (V) (double)
-    //     2) bass cone displacement (mm) (float)
-    //     3) treeble driver voltage (V) (double)
-    //     4) treeble cone displacement (mm) (float)
-    //     5) vent exhaust pressure (float)
+    double bassDriverVoltageVolts = 31.43;
+    float bassConeDisplacementMillimeters = 2.3;
+    double treebleDriverVoltageVolts = 30.56;
+    float treebleConeDisplacementMillimeters = 0.4;
+    float ventExhaustOverPressurePa = 45.121f;
     // 3 things it can do:
     //     1) process signal
     //     2) emit sound
@@ -678,12 +676,11 @@ Thing 10) stereo
 */
 struct Stereo
 {
-    // 5 properties:
-    //     1) turntable
-    //     2) cassette deck
-    //     3) amplifier
-    //     4) tuner
-    //     5) speaker
+    Turntable turntable;
+    CasseteDeck cassetteDeck;
+    Amplifier amplifier;
+    Tuner tuner;
+    Speaker speaker1, speaker2
     // 3 things it can do:
     //     1) play music
     //     2) change radio channel
