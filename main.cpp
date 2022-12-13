@@ -512,7 +512,7 @@ struct VendingMachine
     float chargeCustomerEuros(int item); // returns the price for the item
 
     // dispense item
-    bool dispenseItem(int item); // returns true if the item is sucessfully dispensed
+    bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); // returns true if the items are sucessfully dispensed
 
     // refrigerate at a given temperature
     void refrigerate(float temperature);
@@ -543,17 +543,7 @@ struct Computer
     // operating system
     std::string operatingSystem = "Solaris";
 
-    // 3 things it can do:
-    // boot up
-    bool bootUp(); // returns true if the boot is successful
-
-    // run an program on given path
-    bool runProgram(std::string path); // returns true if the program is started successfully
-
-    // crash
-    void crash();
-
-    struct HardDrive {
+    struct Drive {
         std::string brand = "Seagate";
         float capacityGB = 2000.0f;
         int standardRpm = 7200;
@@ -566,6 +556,18 @@ struct Computer
 
         bool parkHeads(); // return true if the heads are parked
     };
+
+    // 3 things it can do:
+    // boot up
+    bool bootUp(Drive systemDrive); // returns true if the boot is successful
+
+    // run an program on given path
+    bool runProgram(Drive programDrive, std::string path); // returns true if the program is started successfully
+
+    // crash
+    void crash();
+
+    
 };
 /*
 Thing 4) motorcycle
