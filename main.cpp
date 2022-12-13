@@ -443,29 +443,6 @@ Thing 1) cat
     2) catch small animals
     3) throw up fur balls
 */
-struct Cat
-{
-    // number of limbs
-    int numLimbs = 3;
-    // number of tails    
-    int numTails = 1;
-    // age
-    float ageYears = 3.6f;
-    // colour
-    std::string colour = "orange";
-    // weight
-    float weightKg = 4.1f;
-
-    // 3 things it can do:
-    // meow
-    void meow(float loudnessDB);
-
-    // catch small animals
-    bool catchAnimal(std::string animalSpecies); // returns true if the animal is caught
-
-    // throw up fur balls
-    float throwUpFurBall(); // returns the size of the fur ball in mm
-};
 /*
 Thing 2) vending machine
 5 properties:
@@ -479,44 +456,6 @@ Thing 2) vending machine
     2) dispense product
     3) refrigerate products
 */
-struct VendingMachine
-{
-    // inventory
-    int inventory = 42;
-    // interior temperature
-    float interiorTemperatureCelsius = 10.2f;
-    // target temperature
-    float targetTemperatureCelsius = 8.5f;
-    // cash collected
-    float cashCollectedEuros = 123.54f;
-    // item selected
-    int itemSelected = 13;
-
-    struct ItemDispenser
-    {
-        std::string name = "KitKat";
-        std::string flavour = "Original";
-        int inventory = 5;
-        float priceEuros = 2.5f;
-        int itemNumber = 13;
-
-        bool distributeItems(int numberOfItems); // returns true if item successfully distributed
-
-        int updateInventory(int itemAdded); // returns the new inventory
-
-        bool disable(std::string cause); // return true if the dispenser is disabled
-    };
-
-    // 3 things it can do:
-    // charge customer for an item
-    float chargeCustomerEuros(int item); // returns the price for the item
-
-    // dispense item
-    bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); // returns true if the items are sucessfully dispensed
-
-    // refrigerate at a given temperature
-    void refrigerate(float temperature);
-};
 /*
 Thing 3) computer
 5 properties:
@@ -530,45 +469,6 @@ Thing 3) computer
     2) run an program
     3) crash
 */
-struct Computer
-{
-    // number of CPU cores
-    int numCPUCores = 6;
-    // CPU frequency in GHz
-    float CPUFrequencyGHz = 3.4f;
-    // memory size
-    int memoryMB = 32;
-    // power needed to run the computer
-    int powerNeededW = 430;
-    // operating system
-    std::string operatingSystem = "Solaris";
-
-    struct Drive {
-        std::string brand = "Seagate";
-        float capacityGB = 2000.0f;
-        int standardRpm = 7200;
-        float readSpeedMBs = 101.1f;
-        float writeSpeedMs = 74.2f;
-
-        int readData(int address); // returns the value at that address
-        
-        bool writeData(int address, int data); // return true if the write succeeded
-
-        bool parkHeads(); // return true if the heads are parked
-    };
-
-    // 3 things it can do:
-    // boot up
-    bool bootUp(Drive systemDrive); // returns true if the boot is successful
-
-    // run an program on given path
-    bool runProgram(Drive programDrive, std::string path); // returns true if the program is started successfully
-
-    // crash
-    void crash();
-
-    
-};
 /*
 Thing 4) motorcycle
 5 properties:
@@ -582,29 +482,6 @@ Thing 4) motorcycle
     2) break
     3) make a wheelie
 */
-struct Motorcycle
-{
-    // brand
-    std::string brand = "Harley Davidson";
-    // model
-    std::string model = "2022 Heritage Classic";
-    // colour
-    std::string colour = "Pink";
-    // engine power in hp
-    int enginePowerHp = 101;
-    // number of cylinders
-    int numCylinders = 2;
-
-    // 3 things it can do:
-    // accelerate
-    float accelerate(float acceleration); // returns new speed
-
-    // break (decelerate)
-    float decelerate(float deceleration); // returns new speed
-
-    // make a wheelie
-    bool makeWheelie(); // returns true if the front wheel takes off the ground
-};
 /*
 Thing 5) turntable
 5 properties:
@@ -618,29 +495,6 @@ Thing 5) turntable
     2) rotate vinyl disk
     3) output groove amplitude
 */
-struct Turntable
-{
-    // platter rotation speed
-    float platterRpm = 32.9f;
-    // tonearm counterweight
-    float tonearmCounterweightGrams = 160.0f;
-    // motor voltage
-    double motorVoltageVolts = 9.2345;
-    // stylus movement amplitude
-    float stylusMovementMicrometers = 2.5f;
-    // speed selection
-    int speedSelection = 33;
-
-    // 3 things it can do:
-    // change rotating speed
-    float changeRotatingSpeed(bool isIncreased); // returns the new rotating speed
-
-    // rotate vinyl disk
-    float rotateDisk(float targetSpeed); // returns the rotating speed
-
-    // output groove amplitude
-    float grooveAmplitude(); // returns the current groove amplitude
-};
 /*
 Thing 6) cassette deck
 5 properties:
@@ -654,29 +508,6 @@ Thing 6) cassette deck
     2) rotate reel
     3) reverse direction
 */
-struct CassetteDeck
-{
-    // cassette compartment open
-    bool isCompartmentOpen = false;
-    // tape speed
-    float tapeSpeedCmPerSecond = 4.76f;
-    // current at the play head
-    double playHeadCurrentMilliAmps = 0.83;
-    // control button pressed
-    std::string controlButtonPressed = "Play";
-    // counter value
-    int counter = 354;
-
-    // 3 things it can do:
-    // read magnetic information 
-    double readMagneticInformation(); // returns a current value in mA
-
-    // rotate reel
-    bool rotateReel(bool isForward); // returns true if the reel rotates
-
-    // reverse direction
-    bool reverseDirection(); // returns true if the direction can be reversed
-};
 /*
 Thing 7) amplifier
 5 properties:
@@ -690,27 +521,6 @@ Thing 7) amplifier
     2) output sound
     3) change source
 */
-struct Amplifier
-{
-    // volume button value
-    float volumeButtonValue = 11.1f;
-    // input signal voltage
-    double inputSignalVoltageVolts = 0.0;
-    // speaker output voltage
-    double speakerOutputVoltageVolts = 0.0;
-    // source selected
-    std::string sourceSelected = "turntable";
-    // equalizer preset
-    std::string equalizerPreset = "jazz";
-
-    // 3 things it can do:
-    // change volume
-    float changeVolume(bool up); // returns new volume
-    // output sound
-    float outputSound(float volume); // returns a signal voltage
-    // change source
-    bool changeSource(std::string newSource); // returns true if the change is successful
-};
 /*
 Thing 8) tuner
 5 properties:
@@ -724,29 +534,6 @@ Thing 8) tuner
     2) change tuning
     3) light up
 */
-struct Tuner
-{
-    // band selected
-    std::string bandSelected = "FM";
-    // tuning know angle
-    float tuningKnobAngleRadians = 1.234f;
-    // preset button pressed
-    std::string presetButtonPressed = "none";
-    // dial position
-    float dialPositionMillimeters = 15.3f;
-    // antenna signal voltage
-    double antennaSignalVoltageMillivolts = 0.132;
-    
-    // 3 things it can do:
-    // select band
-    bool selectBand(std::string newBand); // returns true if the selection is successful
-
-    // change tuning
-    float changeTuning(bool up); // returns the new tuning knob rotation angle
-
-    // light up
-    bool lightUp(); // returns true if the light is on
-};
 /*
 Thing 9) speaker
 5 properties:
@@ -760,29 +547,6 @@ Thing 9) speaker
     2) emit sound
     3) blow
 */
-struct Speaker
-{
-    // bass driver voltage
-    double bassDriverVoltageVolts = 31.43;
-    // bass cone displacement
-    float bassConeDisplacementMillimeters = 2.3f;
-    // treeble driver voltage
-    double treebleDriverVoltageVolts = 30.56;
-    // treeble cone displacement
-    float treebleConeDisplacementMillimeters = 0.4f;
-    // vent exhaust pressure
-    float ventExhaustOverPressurePa = 45.121f;
-
-    // 3 things it can do:
-    // process signal
-    float processSignal(float inputSignal); // returns a driver current 
-  
-    // emit sound
-    void emitSound(float driverCurrent);
-    
-    // blow
-    void blow(float driverCurrent);
-};
 /*
 Thing 10) stereo
 5 properties:
@@ -796,29 +560,6 @@ Thing 10) stereo
     2) change radio channel
     3) copy tape
 */
-struct Stereo
-{
-    // turntable
-    Turntable turntable;
-    // cassette deck
-    CassetteDeck cassetteDeck;
-    // amplifier
-    Amplifier amplifier;
-    // tuner
-    Tuner tuner;
-    // speakers
-    Speaker speaker1, speaker2;
-
-    // 3 things it can do:
-    // play music
-    bool playMusic(std::string source); // returns true if music can be played from source
-
-    // change radio channel
-    bool changeRadioChannel(std::string newRadioChannel); // returns true if change is successful
-
-    // record tape
-    bool recordTape(std::string inputSource); // returns true if the source can be recorded
-};
 /*
 =================
 Part 1d - Step 7: Commit
@@ -835,7 +576,6 @@ After you have MOVED/CUT-AND-PASTED your 10 UDTs, send me a DM with your pull re
 I will review the pseudo-code that you have written.
 If approved, you'll start on Part 1e
 */
-
 /*
 *********************************************************************************
 ************************************ PART 1E ************************************
@@ -1277,13 +1017,273 @@ Part 1e - Step 19: Request a review
 paste your code below
 */
 
+struct Cat
+{
+    // number of limbs
+    int numLimbs = 3;
+    // number of tails    
+    int numTails = 1;
+    // age
+    float ageYears = 3.6f;
+    // colour
+    std::string colour = "orange";
+    // weight
+    float weightKg = 4.1f;
+
+    // 3 things it can do:
+    // meow
+    void meow(float loudnessDB);
+
+    // catch small animals
+    bool catchAnimal(std::string animalSpecies); // returns true if the animal is caught
+
+    // throw up fur balls
+    float throwUpFurBall(); // returns the size of the fur ball in mm
+};
 
 
+struct VendingMachine
+{
+    // inventory
+    int inventory = 42;
+    // interior temperature
+    float interiorTemperatureCelsius = 10.2f;
+    // target temperature
+    float targetTemperatureCelsius = 8.5f;
+    // cash collected
+    float cashCollectedEuros = 123.54f;
+    // item selected
+    int itemSelected = 13;
 
+    struct ItemDispenser
+    {
+        std::string name = "KitKat";
+        std::string flavour = "Original";
+        int inventory = 5;
+        float priceEuros = 2.5f;
+        int itemNumber = 13;
 
+        bool distributeItems(int numberOfItems); // returns true if item successfully distributed
 
+        int updateInventory(int itemAdded); // returns the new inventory
 
+        bool disable(std::string cause); // return true if the dispenser is disabled
+    };
 
+    // 3 things it can do:
+    // charge customer for an item
+    float chargeCustomerEuros(int item); // returns the price for the item
+
+    // dispense item
+    bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); // returns true if the items are sucessfully dispensed
+
+    // refrigerate at a given temperature
+    void refrigerate(float temperature);
+};
+
+struct Computer
+{
+    // number of CPU cores
+    int numCPUCores = 6;
+    // CPU frequency in GHz
+    float CPUFrequencyGHz = 3.4f;
+    // memory size
+    int memoryMB = 32;
+    // power needed to run the computer
+    int powerNeededW = 430;
+    // operating system
+    std::string operatingSystem = "Solaris";
+
+    struct Drive {
+        std::string brand = "Seagate";
+        float capacityGB = 2000.0f;
+        int standardRpm = 7200;
+        float readSpeedMBs = 101.1f;
+        float writeSpeedMs = 74.2f;
+
+        int readData(int address); // returns the value at that address
+        
+        bool writeData(int address, int data); // return true if the write succeeded
+
+        bool parkHeads(); // return true if the heads are parked
+    };
+
+    // 3 things it can do:
+    // boot up
+    bool bootUp(Drive systemDrive); // returns true if the boot is successful
+
+    // run an program on given path
+    bool runProgram(Drive programDrive, std::string path); // returns true if the program is started successfully
+
+    // crash
+    void crash();    
+};
+
+struct Motorcycle
+{
+    // brand
+    std::string brand = "Harley Davidson";
+    // model
+    std::string model = "2022 Heritage Classic";
+    // colour
+    std::string colour = "Pink";
+    // engine power in hp
+    int enginePowerHp = 101;
+    // number of cylinders
+    int numCylinders = 2;
+
+    // 3 things it can do:
+    // accelerate
+    float accelerate(float acceleration); // returns new speed
+
+    // break (decelerate)
+    float decelerate(float deceleration); // returns new speed
+
+    // make a wheelie
+    bool makeWheelie(); // returns true if the front wheel takes off the ground
+};
+
+struct Turntable
+{
+    // platter rotation speed
+    float platterRpm = 32.9f;
+    // tonearm counterweight
+    float tonearmCounterweightGrams = 160.0f;
+    // motor voltage
+    double motorVoltageVolts = 9.2345;
+    // stylus movement amplitude
+    float stylusMovementMicrometers = 2.5f;
+    // speed selection
+    int speedSelection = 33;
+
+    // 3 things it can do:
+    // change rotating speed
+    float changeRotatingSpeed(bool isIncreased); // returns the new rotating speed
+
+    // rotate vinyl disk
+    float rotateDisk(float targetSpeed); // returns the rotating speed
+
+    // output groove amplitude
+    float grooveAmplitude(); // returns the current groove amplitude
+};
+
+struct CassetteDeck
+{
+    // cassette compartment open
+    bool isCompartmentOpen = false;
+    // tape speed
+    float tapeSpeedCmPerSecond = 4.76f;
+    // current at the play head
+    double playHeadCurrentMilliAmps = 0.83;
+    // control button pressed
+    std::string controlButtonPressed = "Play";
+    // counter value
+    int counter = 354;
+
+    // 3 things it can do:
+    // read magnetic information 
+    double readMagneticInformation(); // returns a current value in mA
+
+    // rotate reel
+    bool rotateReel(bool isForward); // returns true if the reel rotates
+
+    // reverse direction
+    bool reverseDirection(); // returns true if the direction can be reversed
+};
+
+struct Amplifier
+{
+    // volume button value
+    float volumeButtonValue = 11.1f;
+    // input signal voltage
+    double inputSignalVoltageVolts = 0.0;
+    // speaker output voltage
+    double speakerOutputVoltageVolts = 0.0;
+    // source selected
+    std::string sourceSelected = "turntable";
+    // equalizer preset
+    std::string equalizerPreset = "jazz";
+
+    // 3 things it can do:
+    // change volume
+    float changeVolume(bool up); // returns new volume
+    // output sound
+    float outputSound(float volume); // returns a signal voltage
+    // change source
+    bool changeSource(std::string newSource); // returns true if the change is successful
+};
+
+struct Tuner
+{
+    // band selected
+    std::string bandSelected = "FM";
+    // tuning know angle
+    float tuningKnobAngleRadians = 1.234f;
+    // preset button pressed
+    std::string presetButtonPressed = "none";
+    // dial position
+    float dialPositionMillimeters = 15.3f;
+    // antenna signal voltage
+    double antennaSignalVoltageMillivolts = 0.132;
+    
+    // 3 things it can do:
+    // select band
+    bool selectBand(std::string newBand); // returns true if the selection is successful
+
+    // change tuning
+    float changeTuning(bool up); // returns the new tuning knob rotation angle
+
+    // light up
+    bool lightUp(); // returns true if the light is on
+};
+
+struct Speaker
+{
+    // bass driver voltage
+    double bassDriverVoltageVolts = 31.43;
+    // bass cone displacement
+    float bassConeDisplacementMillimeters = 2.3f;
+    // treeble driver voltage
+    double treebleDriverVoltageVolts = 30.56;
+    // treeble cone displacement
+    float treebleConeDisplacementMillimeters = 0.4f;
+    // vent exhaust pressure
+    float ventExhaustOverPressurePa = 45.121f;
+
+    // 3 things it can do:
+    // process signal
+    float processSignal(float inputSignal); // returns a driver current 
+  
+    // emit sound
+    void emitSound(float driverCurrent);
+    
+    // blow
+    void blow(float driverCurrent);
+};
+
+struct Stereo
+{
+    // turntable
+    Turntable turntable;
+    // cassette deck
+    CassetteDeck cassetteDeck;
+    // amplifier
+    Amplifier amplifier;
+    // tuner
+    Tuner tuner;
+    // speakers
+    Speaker speaker1, speaker2;
+
+    // 3 things it can do:
+    // play music
+    bool playMusic(std::string source); // returns true if music can be played from source
+
+    // change radio channel
+    bool changeRadioChannel(std::string newRadioChannel); // returns true if change is successful
+
+    // record tape
+    bool recordTape(std::string inputSource); // returns true if the source can be recorded
+};
 
 int main()
 {
