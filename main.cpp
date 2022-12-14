@@ -1094,7 +1094,8 @@ struct Computer
     // operating system
     std::string operatingSystem = "Solaris";
 
-    struct Drive {
+    struct Drive 
+    {
         std::string brand = "Seagate";
         float capacityGB = 2000.0f;
         int standardRpm = 7200;
