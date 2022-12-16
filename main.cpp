@@ -353,11 +353,11 @@ int Computer::Drive::readData(unsigned int address)
     return rand();
 }
 
-bool Computer::Drive::writeData(unsigned int address, int data)
+bool Computer::Drive::writeData(unsigned int address, unsigned int data)
 {
     bool writeFailed = false;
     
-    srand(address); 
+    srand(address*data); 
     if ((rand() % 1000000) == 0) // Very bad harddrive!
     {
         writeFailed = true;
@@ -466,18 +466,6 @@ struct Turntable
 
     float grooveAmplitude();
 };
-
-void Turntable::changeSpeedSelection(bool isIncreased)
-{
-    if (isIncreased)
-    {
-        speedSelection = 45;
-    }
-    else
-    {
-        speedSelection = 33;
-    }
-}
 
 struct CassetteDeck
 {
