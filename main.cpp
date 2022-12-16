@@ -230,7 +230,7 @@ float Cat::throwUpFurBall()
 
 struct VendingMachine
 {
-    int inventory = 42;
+    bool isOn = true;
     float interiorTemperatureCelsius = 10.2f;
     float targetTemperatureCelsius = 8.5f;
     float cashCollectedEuros = 123.54f;
@@ -243,20 +243,79 @@ struct VendingMachine
         int inventory = 5;
         float priceEuros = 2.5f;
         int itemNumber = 13;
+        bool isDisabled = false;
 
         bool distributeItems(int numberOfItems); 
 
-        int updateInventory(int itemAdded); 
+        void stockUp(int itemsAdded); 
 
-        bool disable(std::string cause); 
+        void disable(std::string cause); 
     };
 
-    float chargeCustomerEuros(int item); 
+    float chargeCustomerEuros(ItemDispenser item, int numberOfItems); 
 
     bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); 
 
-    void refrigerate(float temperature);
+    bool refrigerate();
 };
+
+bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
+{
+    bool isDispensed = false;
+    
+    if (inventory >= numberOfItems)
+    {
+        inventory -= numberOfItems;
+        isDispensed = true;
+    }
+    else
+    {
+        disable("Empty");
+    }    
+    
+    return isDispensed;
+}
+
+void VendingMachine::ItemDispenser::stockUp(int itemsAdded)
+{
+    inventory += itemsAdded;
+}
+
+void VendingMachine::ItemDispenser::disable(std::string cause)
+{
+    if (cause == "Empty") 
+    {
+        name = "";
+        flavour = "";
+    }
+}
+
+float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
+{
+    return item.priceEuros * static_cast< float >(numberOfItems);
+}
+
+bool VendingMachine::dispenseItem(ItemDispenser itemDispenser, int numberOfItems)
+{
+    bool isDispensed;
+    
+    itemDispenser.distributeItems(numberOfItems);
+    isDispensed = itemDispenser.isDisabled;
+
+    return isDispensed;
+}
+
+bool VendingMachine::refrigerate()
+{
+    bool refrigerationNeeded = false;
+    
+    if (interiorTemperatureCelsius > targetTemperatureCelsius)
+    {
+        refrigerationNeeded = true;       
+    }
+
+    return refrigerationNeeded;
+}
 
 struct Computer
 {
