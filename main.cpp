@@ -499,7 +499,7 @@ struct CassetteDeck
     bool isCompartmentOpen = false;
     float tapeSpeedCmPerSecond = 4.76f;
     float reelSpeed;
-    float speedCoefficient = 1.124;
+    float speedCoefficient = 1.124f;
     double playHeadCurrentMilliAmps = 0.83;
     std::string controlButtonPressed = "Play";
     int counter = 354;
@@ -507,7 +507,7 @@ struct CassetteDeck
     
     int readMagneticInformation(); 
 
-    void rotateReel(float speedCoefficient); 
+    void rotateReel(); 
 
     void reverseDirection(); 
 };
