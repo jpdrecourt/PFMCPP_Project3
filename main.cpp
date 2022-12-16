@@ -625,13 +625,38 @@ struct Speaker
     double treebleDriverVoltageVolts = 30.56;
     float treebleConeDisplacementMillimeters = 0.4f;
     float ventExhaustOverPressurePa = 45.121f;
+    float maxCurrent = 1.2f;
 
     float processSignal(float inputSignal); 
   
-    void emitSound(float driverCurrent);
+    float emitSound(float driverCurrent);
     
-    void blow(float driverCurrent);
+    bool blow(float driverCurrent);
 };
+
+float Speaker::processSignal(float inputSignal)
+{
+    return inputSignal * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+}
+
+float Speaker::emitSound(float driverCurrent)
+{
+    float conversionConstant = 0.12842f;
+    
+    return driverCurrent*conversionConstant;
+}
+
+bool Speaker::blow(float driverCurrent)
+{
+    bool isBlown = false;
+    
+    if (std::abs(driverCurrent) > maxCurrent)
+    {
+        isBlown = true;
+    }
+
+    return isBlown;
+}
 
 struct Stereo
 {
