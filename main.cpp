@@ -382,7 +382,7 @@ bool Computer::bootUp(Drive systemDrive)
 {
     bool isBooted = true;
     
-    isBooted = systemDrive.readData(rand());
+    isBooted = systemDrive.readData(static_cast<unsigned int>(rand()));
 
     return isBooted;
 }
@@ -412,13 +412,33 @@ struct Motorcycle
     std::string colour = "Pink";
     int enginePowerHp = 101;
     int numCylinders = 2;
+    float speedKilometerPerHour = 0.0f; 
 
-    float accelerate(float acceleration); 
+    void accelerate(float acceleration); 
 
-    float decelerate(float deceleration);
+    void decelerate(float deceleration);
 
     bool makeWheelie(); 
 };
+
+void Motorcycle::accelerate(float acceleration)
+{
+    speedKilometerPerHour += acceleration;
+}
+
+void Motorcycle::decelerate(float deceleration) 
+{
+    speedKilometerPerHour -= deceleration;
+    if (speedKilometerPerHour < 0)
+    {
+        speedKilometerPerHour = 0;
+    }
+}
+
+bool Motorcycle::makeWheelie() 
+{
+    
+}
 
 struct Turntable
 {
