@@ -586,13 +586,37 @@ struct Tuner
     std::string presetButtonPressed = "none";
     float dialPositionMillimeters = 15.3f;
     double antennaSignalVoltageMillivolts = 0.132;
+    float tuning;
     
-    bool selectBand(std::string newBand);
+    void selectBand(std::string newBand);
 
-    float changeTuning(bool up); 
+    void changeTuning(bool up); 
 
-    bool lightUp(); 
+    void lightUp(); 
 };
+
+void Tuner::selectBand(std::string newBand)
+{
+    bandSelected = newBand;
+}
+
+void Tuner::changeTuning(bool up)
+{   // TODO Tuning and tuning limits for various bands
+    float tuningDelta = 1;
+    if (up)
+    {
+        tuning += tuningDelta;
+    }
+    else
+    {
+        tuning -= tuningDelta;
+    }
+}
+
+void Tuner::lightUp()
+{
+    std::cout << "Dial lit up!" << std::endl;
+}
 
 struct Speaker
 {
