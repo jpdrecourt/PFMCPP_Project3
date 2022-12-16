@@ -181,14 +181,52 @@ struct Cat
     float ageYears = 3.6f;
     std::string colour = "orange";
     float weightKg = 4.1f;
+    int cutenessLevel= 50;
 
-    void meow(float loudnessDB);
+    void meow(int loudnessDB);
 
     bool catchAnimal(std::string animalSpecies); 
 
     float throwUpFurBall(); 
 };
 
+void Cat::meow(int loudnessDB)
+{
+    if (loudnessDB < 30)
+    {
+        cutenessLevel += 10;
+    }
+    else
+    {
+        cutenessLevel -= loudnessDB;        
+    }
+}
+
+bool Cat::catchAnimal(std::string animalSpecies)
+{
+    bool isAnimalCaught = false;
+    
+    if (animalSpecies == "Fly")
+    {
+        isAnimalCaught = true;
+        cutenessLevel += 10;
+    }
+    else
+    {
+        isAnimalCaught = false;
+        cutenessLevel -= 10;
+    }
+
+    return isAnimalCaught;
+}
+
+float Cat::throwUpFurBall()
+{
+    float furBallSizeMillimeters;
+    furBallSizeMillimeters = weightKg * 4;
+    cutenessLevel -= 50;
+    return furBallSizeMillimeters;
+}
 
 struct VendingMachine
 {
