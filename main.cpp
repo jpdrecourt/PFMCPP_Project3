@@ -353,11 +353,11 @@ int Computer::Drive::readData(unsigned int address)
     return rand();
 }
 
-bool Computer::Drive::writeData(unsigned int address, unsigned int data)
+bool Computer::Drive::writeData(unsigned int address, int data)
 {
     bool writeFailed = false;
     
-    srand(address * data); 
+    srand(address); 
     if ((rand() % 1000000) == 0) // Very bad harddrive!
     {
         writeFailed = true;
@@ -381,8 +381,13 @@ bool Computer::Drive::parkHeads()
 bool Computer::bootUp(Drive systemDrive)
 {
     bool isBooted = true;
+    int data;
     
-    isBooted = systemDrive.readData(static_cast<unsigned int>(rand()));
+    data = systemDrive.readData(static_cast<unsigned int>(rand()));
+    if (data == 0)
+    {
+        isBooted = false;
+    }
 
     return isBooted;
 }
@@ -437,7 +442,14 @@ void Motorcycle::decelerate(float deceleration)
 
 bool Motorcycle::makeWheelie() 
 {
+    bool wheelie = false;
     
+    if (speedKilometerPerHour > 20)
+    {
+        wheelie = true;
+    }
+
+    return wheelie;
 }
 
 struct Turntable
@@ -448,12 +460,24 @@ struct Turntable
     float stylusMovementMicrometers = 2.5f;
     int speedSelection = 33;
 
-    float changeRotatingSpeed(bool isIncreased); 
+    void changeSpeedSelection(bool isIncreased); 
 
-    float rotateDisk(float targetSpeed); 
+    float rotateDisk(); 
 
     float grooveAmplitude();
 };
+
+void Turntable::changeSpeedSelection(bool isIncreased)
+{
+    if (isIncreased)
+    {
+        speedSelection = 45;
+    }
+    else
+    {
+        speedSelection = 33;
+    }
+}
 
 struct CassetteDeck
 {
