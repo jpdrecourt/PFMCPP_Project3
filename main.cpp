@@ -28,6 +28,7 @@ Thing: Car Wash
 
 #include <iostream>
 #include <string>
+#include <ctime>
 namespace Part1eVersion 
 {
 struct CarWash        
@@ -462,10 +463,37 @@ struct Turntable
 
     void changeSpeedSelection(bool isIncreased); 
 
-    float rotateDisk(); 
+    void rotatePlatter(); 
 
     float grooveAmplitude();
 };
+
+void Turntable::changeSpeedSelection(bool isIncreased)
+{
+    if (isIncreased)
+    {
+        speedSelection = 45;
+    }
+    else
+    {
+        speedSelection = 33;
+    }
+}
+
+void Turntable::rotatePlatter()
+{
+    float speedDifference = platterRpm - static_cast< float >(speedSelection);
+    if (std::abs(speedDifference) > 0.5f)
+    {
+        platterRpm -= 0.1f*(speedDifference);
+    }
+}
+
+float grooveAmplitude()
+{
+    return static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // Amplitude between 0.0f and 1.0f
+}
+
 
 struct CassetteDeck
 {
@@ -544,5 +572,6 @@ struct Stereo
 
 int main()
 {
+    srand( static_cast<unsigned int> (time(nullptr)) );
     std::cout << "good to go!" << std::endl;
 }
