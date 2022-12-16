@@ -350,8 +350,7 @@ struct Computer
 
 int Computer::Drive::readData(unsigned int address)
 {
-    srand(address); 
-    return rand();
+    return static_cast<int> (address) * rand();
 }
 
 bool Computer::Drive::writeData(unsigned int address, unsigned int data)
