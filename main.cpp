@@ -668,10 +668,39 @@ struct Stereo
 
     bool playMusic(std::string source);
 
-    bool changeRadioChannel(std::string newRadioChannel);
+    void changeRadioChannel(std::string newRadioChannel);
 
     bool recordTape(std::string inputSource); 
 };
+
+bool Stereo::playMusic(std::string source)
+{
+    bool isPlaying = false;
+    
+    if (source == "Turntable" || source == "Cassette" || source == "Tuner")
+    {
+        isPlaying = true;
+    }
+
+    return isPlaying;
+}
+
+void Stereo::changeRadioChannel(std::string newRadioChannel)
+{
+    std::cout << "Channel changed to: " << newRadioChannel << std::endl;
+}
+
+bool Stereo::recordTape(std::string inputSource)
+{
+    bool isRecording = false;
+
+    if (inputSource == "Turntable" || inputSource == "Tuner")
+    {
+        isRecording = true;
+    }
+
+    return isRecording;
+}
 
 int main()
 {
