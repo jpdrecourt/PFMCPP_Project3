@@ -292,7 +292,7 @@ void VendingMachine::ItemDispenser::disable(std::string cause)
 
 float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
 {
-    return item.priceEuros * static_cast< float >(numberOfItems);
+    return item.priceEuros * static_cast< float >( numberOfItems );
 }
 
 bool VendingMachine::dispenseItem(ItemDispenser itemDispenser, int numberOfItems)
@@ -333,9 +333,9 @@ struct Computer
         float readSpeedMBs = 101.1f;
         float writeSpeedMs = 74.2f;
 
-        int readData(int address); 
+        int readData(unsigned int address); 
         
-        bool writeData(int address, int data); 
+        bool writeData(unsigned int address, unsigned int data); 
 
         bool parkHeads(); 
     };
@@ -344,8 +344,66 @@ struct Computer
 
     bool runProgram(Drive programDrive, std::string path); 
 
-    void crash();    
+    bool crash();    
 };
+
+int Computer::Drive::readData(unsigned int address)
+{
+    srand(address); 
+    return rand();
+}
+
+bool Computer::Drive::writeData(unsigned int address, unsigned int data)
+{
+    bool writeFailed = false;
+    
+    srand(address * data); 
+    if ((rand() % 1000000) == 0) // Very bad harddrive!
+    {
+        writeFailed = true;
+    }
+    
+    return writeFailed;
+}
+
+bool Computer::Drive::parkHeads()
+{
+    bool isParked = true;
+    
+    if ((rand() % 1000000) == 0)
+    {
+        isParked = false;
+    }
+
+    return isParked;
+}
+
+bool Computer::bootUp(Drive systemDrive)
+{
+    bool isBooted = true;
+    
+    isBooted = systemDrive.readData(rand());
+
+    return isBooted;
+}
+
+bool Computer::runProgram(Drive programDrive, std::string path)
+{
+    std::cout << "Running " << path << "on " << programDrive.brand << std::endl;
+    return true;
+}
+
+bool Computer::crash()
+{
+    bool isCrashed = false;
+    
+    if (operatingSystem != "Solaris") 
+    {
+        isCrashed = ((rand() % 1000000) == 0);
+    }
+
+    return isCrashed;
+}
 
 struct Motorcycle
 {
