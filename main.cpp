@@ -669,7 +669,7 @@ struct Stereo
 
     bool playMusic(std::string source);
 
-    void changeRadioChannel(std::string newRadioChannel);
+    void changeRadioChannel(std::string newRadioChannel, bool up);
 
     bool recordTape(std::string inputSource); 
 };
@@ -686,9 +686,10 @@ bool Stereo::playMusic(std::string source)
     return isPlaying;
 }
 
-void Stereo::changeRadioChannel(std::string newRadioChannel)
+void Stereo::changeRadioChannel(std::string newRadioChannel, bool up)
 {
     std::cout << "Channel changed to: " << newRadioChannel << std::endl;
+    tuner.changeTuning(up);
 }
 
 bool Stereo::recordTape(std::string inputSource)
@@ -698,6 +699,7 @@ bool Stereo::recordTape(std::string inputSource)
     if (inputSource == "Turntable" || inputSource == "Tuner")
     {
         isRecording = true;
+        cassetteDeck.rotateReel();
     }
 
     return isRecording;
