@@ -498,16 +498,39 @@ struct CassetteDeck
 {
     bool isCompartmentOpen = false;
     float tapeSpeedCmPerSecond = 4.76f;
+    float reelSpeed;
     double playHeadCurrentMilliAmps = 0.83;
     std::string controlButtonPressed = "Play";
     int counter = 354;
+    bool isForward = true;
+    
+    int readMagneticInformation(); 
 
-    double readMagneticInformation(); 
+    void rotateReel(float speedCoefficient); 
 
-    bool rotateReel(bool isForward); 
-
-    bool reverseDirection(); 
+    void reverseDirection(); 
 };
+
+int CassetteDeck::readMagneticInformation()
+{
+    return rand();
+}
+
+void CassetteDeck::rotateReel(float speedCoefficient)
+{
+    int reverseCoefficient = 1;
+    if(!isForward)
+    {
+        reverseCoefficient = -1;
+    }
+    
+    reelSpeed = tapeSpeedCmPerSecond * speedCoefficient;
+}
+
+void CassetteDeck::reverseDirection()
+{
+    isForward = !isForward;
+}
 
 struct Amplifier
 {
