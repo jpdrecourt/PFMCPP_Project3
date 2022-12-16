@@ -535,17 +535,49 @@ void CassetteDeck::reverseDirection()
 struct Amplifier
 {
     float volumeButtonValue = 11.1f;
+    float maxVolume = 100.0f;
     double inputSignalVoltageVolts = 0.0;
     double speakerOutputVoltageVolts = 0.0;
     std::string sourceSelected = "turntable";
     std::string equalizerPreset = "jazz";
 
-    float changeVolume(bool up); 
+    void changeVolume(bool up); 
 
-    float outputSound(float volume); 
+    float outputSound(); 
 
-    bool changeSource(std::string newSource);
+    void changeSource(std::string newSource);
 };
+
+void Amplifier::changeVolume(bool up)
+{
+    float volumeDelta = 0.1f;
+    if (up)
+    {
+        volumeButtonValue += volumeDelta;
+        if (volumeButtonValue > maxVolume)
+        {
+            volumeButtonValue = maxVolume;
+        }
+    }
+    else
+    {
+        volumeButtonValue -= volumeDelta;
+        if (volumeButtonValue < 0)
+        {
+            volumeButtonValue = 0;
+        }
+    }
+}
+
+float Amplifier::outputSound()
+{
+    return static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * volumeButtonValue / maxVolume;
+}
+
+void Amplifier::changeSource(std::string newSource)
+{
+    sourceSelected = newSource;
+}
 
 struct Tuner
 {
