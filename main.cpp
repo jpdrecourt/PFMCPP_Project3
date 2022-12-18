@@ -29,6 +29,8 @@ Thing: Car Wash
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <cmath>
+
 namespace Part1eVersion 
 {
 struct CarWash        
@@ -293,7 +295,12 @@ void VendingMachine::ItemDispenser::disable(std::string cause)
 
 float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
 {
-    return item.priceEuros * static_cast< float >( numberOfItems );
+    float priceCharged = 0.0f;
+    for (int i = 0; i < numberOfItems; i++)
+    {
+        priceCharged += item.priceEuros;        
+    }
+    return priceCharged;
 }
 
 bool VendingMachine::dispenseItem(ItemDispenser itemDispenser, int numberOfItems)
@@ -334,9 +341,9 @@ struct Computer
         float readSpeedMBs = 101.1f;
         float writeSpeedMs = 74.2f;
 
-        int readData(unsigned int address); 
+        int readData(int address); 
         
-        bool writeData(unsigned int address, unsigned int data); 
+        bool writeData(int address, int data); 
 
         bool parkHeads(); 
     };
@@ -348,17 +355,16 @@ struct Computer
     bool crash();    
 };
 
-int Computer::Drive::readData(unsigned int address)
+int Computer::Drive::readData(int address)
 {
-    return static_cast<int> (address) * rand();
+    return address * rand();
 }
 
-bool Computer::Drive::writeData(unsigned int address, unsigned int data)
+bool Computer::Drive::writeData(int address, int data)
 {
     bool writeFailed = false;
     
-    srand(address*data); 
-    if ((rand() % 1000000) == 0) // Very bad harddrive!
+    if (((rand() * address * data) % 1000000) == 0) // Very bad harddrive!
     {
         writeFailed = true;
     }
@@ -383,7 +389,7 @@ bool Computer::bootUp(Drive systemDrive)
     bool isBooted = true;
     int data;
     
-    data = systemDrive.readData(static_cast<unsigned int>(rand()));
+    data = systemDrive.readData(rand());
     if (data == 0)
     {
         isBooted = false;
@@ -458,13 +464,13 @@ struct Turntable
     float tonearmCounterweightGrams = 160.0f;
     double motorVoltageVolts = 9.2345;
     float stylusMovementMicrometers = 2.5f;
-    int speedSelection = 33;
+    float speedSelection = 33.0f;
 
     void changeSpeedSelection(bool isIncreased); 
 
     void rotatePlatter(); 
 
-    float grooveAmplitude();
+    int grooveAmplitude();
 };
 
 void Turntable::changeSpeedSelection(bool isIncreased)
@@ -481,16 +487,16 @@ void Turntable::changeSpeedSelection(bool isIncreased)
 
 void Turntable::rotatePlatter()
 {
-    float speedDifference = platterRpm - static_cast< float >(speedSelection);
+    float speedDifference = platterRpm - speedSelection;
     if (std::abs(speedDifference) > 0.5f)
     {
         platterRpm -= 0.1f*(speedDifference);
     }
 }
 
-float grooveAmplitude()
+int grooveAmplitude()
 {
-    return static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // Amplitude between 0.0f and 1.0f
+    return rand(); 
 }
 
 
@@ -544,7 +550,7 @@ struct Amplifier
 
     void changeVolume(bool up); 
 
-    float outputSound(); 
+    int outputSound(); 
 
     void changeSource(std::string newSource);
 };
@@ -570,9 +576,9 @@ void Amplifier::changeVolume(bool up)
     }
 }
 
-float Amplifier::outputSound()
+int Amplifier::outputSound()
 {
-    return static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * volumeButtonValue / maxVolume;
+    return rand();
 }
 
 void Amplifier::changeSource(std::string newSource)
@@ -637,7 +643,8 @@ struct Speaker
 
 float Speaker::processSignal(float inputSignal)
 {
-    return inputSignal * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+    float processingConstant = 0.182917f;
+    return inputSignal * processingConstant;
 }
 
 float Speaker::emitSound(float driverCurrent)
@@ -707,6 +714,6 @@ bool Stereo::recordTape(std::string inputSource)
 
 int main()
 {
-    srand( static_cast<unsigned int> (time(nullptr)) );
+    srand(438905280);
     std::cout << "good to go!" << std::endl;
 }
