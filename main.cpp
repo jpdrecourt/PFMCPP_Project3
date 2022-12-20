@@ -207,28 +207,22 @@ void Cat::meow(int loudnessDB)
 
 bool Cat::catchAnimal(std::string animalSpecies)
 {
-    bool isAnimalCaught = false;
-    
     if (animalSpecies == "Fly")
     {
-        isAnimalCaught = true;
         cutenessLevel += 10;
+        return true;
     }
     else
     {
-        isAnimalCaught = false;
         cutenessLevel -= 10;
+        return false;
     }
-
-    return isAnimalCaught;
 }
 
 float Cat::throwUpFurBall()
 {
-    float furBallSizeMillimeters;
-    furBallSizeMillimeters = weightKg * 4;
     cutenessLevel -= 50;
-    return furBallSizeMillimeters;
+    return weightKg * 4;
 }
 
 struct VendingMachine
@@ -264,19 +258,19 @@ struct VendingMachine
 
 bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
 {
-    bool isDispensed = false;
-    
     if (inventory >= numberOfItems)
     {
         inventory -= numberOfItems;
-        isDispensed = true;
+        return true;
     }
-    else
+    else 
     {
-        disable("Empty");
+        if (inventory == 0)
+        {
+            disable("Empty");        
+        }
+        return false;
     }    
-    
-    return isDispensed;
 }
 
 void VendingMachine::ItemDispenser::stockUp(int itemsAdded)
@@ -305,24 +299,13 @@ float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
 
 bool VendingMachine::dispenseItem(ItemDispenser itemDispenser, int numberOfItems)
 {
-    bool isDispensed;
-    
     itemDispenser.distributeItems(numberOfItems);
-    isDispensed = itemDispenser.isDisabled;
-
-    return isDispensed;
+    return itemDispenser.isDisabled;
 }
 
 bool VendingMachine::refrigerate()
 {
-    bool refrigerationNeeded = false;
-    
-    if (interiorTemperatureCelsius > targetTemperatureCelsius)
-    {
-        refrigerationNeeded = true;       
-    }
-
-    return refrigerationNeeded;
+    return interiorTemperatureCelsius > targetTemperatureCelsius;
 }
 
 struct Computer
@@ -362,40 +345,17 @@ int Computer::Drive::readData(int address)
 
 bool Computer::Drive::writeData(int address, int data)
 {
-    bool writeFailed = false;
-    
-    if (((rand() * address * data) % 1000000) == 0) // Very bad harddrive!
-    {
-        writeFailed = true;
-    }
-    
-    return writeFailed;
+    return ((rand() * address * data) % 1000000) != 0; // Very bad harddrive!
 }
 
 bool Computer::Drive::parkHeads()
 {
-    bool isParked = true;
-    
-    if ((rand() % 1000000) == 0)
-    {
-        isParked = false;
-    }
-
-    return isParked;
+    return (rand() % 1000000) != 0;
 }
 
 bool Computer::bootUp(Drive systemDrive)
 {
-    bool isBooted = true;
-    int data;
-    
-    data = systemDrive.readData(rand());
-    if (data == 0)
-    {
-        isBooted = false;
-    }
-
-    return isBooted;
+    return systemDrive.readData(rand()) != 0;
 }
 
 bool Computer::runProgram(Drive programDrive, std::string path)
@@ -406,14 +366,14 @@ bool Computer::runProgram(Drive programDrive, std::string path)
 
 bool Computer::crash()
 {
-    bool isCrashed = false;
-    
-    if (operatingSystem != "Solaris") 
+    if (operatingSystem == "Solaris") 
     {
-        isCrashed = ((rand() % 1000000) == 0);
+        return false;
     }
-
-    return isCrashed;
+    else
+    {
+        return (rand() % 1000000) == 0;
+    }
 }
 
 struct Motorcycle
@@ -448,14 +408,7 @@ void Motorcycle::decelerate(float deceleration)
 
 bool Motorcycle::makeWheelie() 
 {
-    bool wheelie = false;
-    
-    if (speedKilometerPerHour > 20)
-    {
-        wheelie = true;
-    }
-
-    return wheelie;
+    return speedKilometerPerHour > 20;
 }
 
 struct Turntable
@@ -477,11 +430,11 @@ void Turntable::changeSpeedSelection(bool isIncreased)
 {
     if (isIncreased)
     {
-        speedSelection = 45;
+        speedSelection = 45.0f;
     }
     else
     {
-        speedSelection = 33;
+        speedSelection = 33.0f;
     }
 }
 
@@ -525,7 +478,6 @@ int CassetteDeck::readMagneticInformation()
 
 void CassetteDeck::rotateReel()
 {
-    
     if(!isForward)
     {
         speedCoefficient = -speedCoefficient;
@@ -644,6 +596,7 @@ struct Speaker
 float Speaker::processSignal(float inputSignal)
 {
     float processingConstant = 0.182917f;
+    
     return inputSignal * processingConstant;
 }
 
@@ -656,14 +609,7 @@ float Speaker::emitSound(float driverCurrent)
 
 bool Speaker::blow(float driverCurrent)
 {
-    bool isBlown = false;
-    
-    if (std::abs(driverCurrent) > maxCurrent)
-    {
-        isBlown = true;
-    }
-
-    return isBlown;
+    return std::abs(driverCurrent) > maxCurrent;
 }
 
 struct Stereo
@@ -683,14 +629,7 @@ struct Stereo
 
 bool Stereo::playMusic(std::string source)
 {
-    bool isPlaying = false;
-    
-    if (source == "Turntable" || source == "Cassette" || source == "Tuner")
-    {
-        isPlaying = true;
-    }
-
-    return isPlaying;
+    return source == "Turntable" || source == "Cassette" || source == "Tuner";
 }
 
 void Stereo::changeRadioChannel(std::string newRadioChannel, bool up)
@@ -701,15 +640,15 @@ void Stereo::changeRadioChannel(std::string newRadioChannel, bool up)
 
 bool Stereo::recordTape(std::string inputSource)
 {
-    bool isRecording = false;
-
     if (inputSource == "Turntable" || inputSource == "Tuner")
     {
-        isRecording = true;
         cassetteDeck.rotateReel();
+        return true;
     }
-
-    return isRecording;
+    else
+    {
+        return false;
+    }
 }
 
 int main()
