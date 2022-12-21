@@ -212,11 +212,8 @@ bool Cat::catchAnimal(std::string animalSpecies)
         cutenessLevel += 10;
         return true;
     }
-    else
-    {
-        cutenessLevel -= 10;
-        return false;
-    }
+    cutenessLevel -= 10;
+    return false;
 }
 
 float Cat::throwUpFurBall()
@@ -263,14 +260,11 @@ bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
         inventory -= numberOfItems;
         return true;
     }
-    else 
+    if (inventory == 0)
     {
-        if (inventory == 0)
-        {
-            disable("Empty");        
-        }
-        return false;
-    }    
+        disable("Empty");        
+    }
+    return false;
 }
 
 void VendingMachine::ItemDispenser::stockUp(int itemsAdded)
@@ -370,10 +364,7 @@ bool Computer::crash()
     {
         return false;
     }
-    else
-    {
-        return (rand() % 1000000) == 0;
-    }
+    return (rand() % 1000000) == 0;
 }
 
 struct Motorcycle
@@ -645,10 +636,7 @@ bool Stereo::recordTape(std::string inputSource)
         cassetteDeck.rotateReel();
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 int main()
