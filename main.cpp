@@ -35,6 +35,7 @@
  */
 
 #include <iostream>
+#include <iomanip>
 namespace Example 
 {
 struct UDT  // my user defined type named 'UDT'
@@ -76,6 +77,7 @@ int main()
 
 struct Cat
 {
+    Cat();
     int numLimbs = 3;
     int numTails = 1;
     float ageYears = 3.6f;
@@ -90,8 +92,14 @@ struct Cat
     float throwUpFurBall(); 
 };
 
+Cat::Cat()
+{
+    std::cout << "Cat being constructed" << std::endl;
+}
+
 void Cat::meow(int loudnessDB)
 {
+    std::cout << "Meow!!!" << std::endl;
     if (loudnessDB < 30)
     {
         cutenessLevel += 10;
@@ -116,11 +124,12 @@ bool Cat::catchAnimal(std::string animalSpecies)
 float Cat::throwUpFurBall()
 {
     cutenessLevel -= 50;
-    return weightKg * 4;
+    return weightKg * 11;
 }
 
 struct VendingMachine
 {
+    VendingMachine();
     bool isOn = true;
     float interiorTemperatureCelsius = 10.2f;
     float targetTemperatureCelsius = 8.5f;
@@ -129,6 +138,7 @@ struct VendingMachine
 
     struct ItemDispenser
     {
+        ItemDispenser();
         std::string name = "KitKat";
         std::string flavour = "Original";
         int inventory = 5;
@@ -143,23 +153,35 @@ struct VendingMachine
         void disable(std::string cause); 
     };
 
+    ItemDispenser kitkatDispenser;
+
     float chargeCustomerEuros(ItemDispenser item, int numberOfItems); 
 
-    bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); 
+    bool dispenseKitkat(int numberOfItems); 
 
-    bool refrigerate();
+    void refrigerate();
 };
+
+VendingMachine::VendingMachine()
+{
+    std::cout << "VendingMachine being constructed" << std::endl;
+}
+
+VendingMachine::ItemDispenser::ItemDispenser()
+{
+    std::cout << "VendingMachine::ItemDispenser being constructed" << std::endl;
+}
 
 bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
 {
     if (inventory >= numberOfItems)
     {
         inventory -= numberOfItems;
+        if (inventory == 0)
+        {
+            disable("Empty"); 
+        }
         return true;
-    }
-    if (inventory == 0)
-    {
-        disable("Empty");        
     }
     return false;
 }
@@ -173,9 +195,9 @@ void VendingMachine::ItemDispenser::disable(std::string cause)
 {
     if (cause == "Empty") 
     {
-        name = "";
-        flavour = "";
+        std::cout << "Please restock " << name << " - " << flavour << std::endl;
     }
+    isDisabled = true;
 }
 
 float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
@@ -188,19 +210,19 @@ float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
     return priceCharged;
 }
 
-bool VendingMachine::dispenseItem(ItemDispenser itemDispenser, int numberOfItems)
+bool VendingMachine::dispenseKitkat(int numberOfItems)
 {
-    itemDispenser.distributeItems(numberOfItems);
-    return itemDispenser.isDisabled;
+    return kitkatDispenser.distributeItems(numberOfItems);
 }
 
-bool VendingMachine::refrigerate()
+void VendingMachine::refrigerate()
 {
-    return interiorTemperatureCelsius > targetTemperatureCelsius;
+    std::cout << (interiorTemperatureCelsius > targetTemperatureCelsius ? "Refrigeration in progress..." : "No refrigeration needed") << std::endl;
 }
 
 struct Computer
 {
+    Computer();
     int numCPUCores = 6;
     float CPUFrequencyGHz = 3.4f;
     int memoryMB = 32;
@@ -209,6 +231,7 @@ struct Computer
 
     struct Drive 
     {
+        Drive();
         std::string brand = "Seagate";
         float capacityGB = 2000.0f;
         int standardRpm = 7200;
@@ -219,8 +242,10 @@ struct Computer
         
         bool writeData(int address, int data); 
 
-        bool parkHeads(); 
+        void parkHeads(); 
     };
+
+    Drive cDrive;
 
     bool bootUp(Drive systemDrive); 
 
@@ -228,6 +253,16 @@ struct Computer
 
     bool crash();    
 };
+
+Computer::Computer()
+{
+    std::cout << "Computer being constructed" << std::endl;
+}
+
+Computer::Drive::Drive()
+{
+    std::cout << "Computer::Drive being constructed" << std::endl;
+}
 
 int Computer::Drive::readData(int address)
 {
@@ -239,9 +274,9 @@ bool Computer::Drive::writeData(int address, int data)
     return ((rand() * address * data) % 1000000) != 0; // Very bad harddrive!
 }
 
-bool Computer::Drive::parkHeads()
+void Computer::Drive::parkHeads()
 {
-    return (rand() % 1000000) != 0;
+    std::cout << ((rand() % 1000000) != 0 ? "Heads parked" : "Failed to park heads!") << std::endl;
 }
 
 bool Computer::bootUp(Drive systemDrive)
@@ -251,7 +286,7 @@ bool Computer::bootUp(Drive systemDrive)
 
 bool Computer::runProgram(Drive programDrive, std::string path)
 {
-    std::cout << "Running " << path << "on " << programDrive.brand << std::endl;
+    std::cout << "Running " << path << " on " << programDrive.brand << std::endl;
     return true;
 }
 
@@ -266,12 +301,13 @@ bool Computer::crash()
 
 struct Motorcycle
 {
+    Motorcycle();
     std::string brand = "Harley Davidson";
     std::string model = "2022 Heritage Classic";
     std::string colour = "Pink";
     int enginePowerHp = 101;
     int numCylinders = 2;
-    float speedKilometerPerHour = 0.0f; 
+    float speedKph = 0.0f; 
 
     void accelerate(float acceleration); 
 
@@ -280,27 +316,34 @@ struct Motorcycle
     bool makeWheelie(); 
 };
 
+Motorcycle::Motorcycle()
+{
+    std::cout << "Motorcycle being constructed" << std::endl;
+}
+
 void Motorcycle::accelerate(float acceleration)
 {
-    speedKilometerPerHour += acceleration;
+    speedKph += acceleration;
+    std::cout << "New speed is: " << speedKph << "km/h\n";
 }
 
 void Motorcycle::decelerate(float deceleration) 
 {
-    speedKilometerPerHour -= deceleration;
-    if (speedKilometerPerHour < 0)
+    speedKph -= deceleration;
+    if (speedKph < 0)
     {
-        speedKilometerPerHour = 0;
+        speedKph = 0;
     }
 }
 
 bool Motorcycle::makeWheelie() 
 {
-    return speedKilometerPerHour > 20;
+    return speedKph > 20;
 }
 
 struct Turntable
 {
+    Turntable();
     float platterRpm = 32.9f;
     float tonearmCounterweightGrams = 160.0f;
     double motorVoltageVolts = 9.2345;
@@ -314,6 +357,11 @@ struct Turntable
     int grooveAmplitude();
 };
 
+Turntable::Turntable()
+{
+    std::cout << "Turntable being constructed" << std::endl;
+}
+
 void Turntable::changeSpeedSelection(bool isIncreased)
 {
     if (isIncreased)
@@ -324,18 +372,20 @@ void Turntable::changeSpeedSelection(bool isIncreased)
     {
         speedSelection = 33.0f;
     }
+    std::cout << "New Speed selection: " << speedSelection << "rpm\n";
 }
 
 void Turntable::rotatePlatter()
 {
     float speedDifference = platterRpm - speedSelection;
-    if (std::abs(speedDifference) > 0.5f)
+    if (std::abs(speedDifference) > 0.05f)
     {
         platterRpm -= 0.1f*(speedDifference);
     }
+    std::cout << "New platter speed: " << platterRpm << "rpm" << std::endl;
 }
 
-int grooveAmplitude()
+int Turntable::grooveAmplitude()
 {
     return rand(); 
 }
@@ -343,6 +393,7 @@ int grooveAmplitude()
 
 struct CassetteDeck
 {
+    CassetteDeck();
     bool isCompartmentOpen = false;
     float tapeSpeedCmPerSecond = 4.76f;
     float reelSpeed;
@@ -359,6 +410,11 @@ struct CassetteDeck
     void reverseDirection(); 
 };
 
+CassetteDeck::CassetteDeck()
+{
+    std::cout << "CassetteDeck being constructed" << std::endl;
+}
+
 int CassetteDeck::readMagneticInformation()
 {
     return rand();
@@ -366,12 +422,9 @@ int CassetteDeck::readMagneticInformation()
 
 void CassetteDeck::rotateReel()
 {
-    if(!isForward)
-    {
-        speedCoefficient = -speedCoefficient;
-    }
+    float directionCoefficient = (isForward ? 1.0f : -1.0f);
     
-    reelSpeed = tapeSpeedCmPerSecond * speedCoefficient;
+    reelSpeed = tapeSpeedCmPerSecond * speedCoefficient * directionCoefficient;
 }
 
 void CassetteDeck::reverseDirection()
@@ -381,6 +434,7 @@ void CassetteDeck::reverseDirection()
 
 struct Amplifier
 {
+    Amplifier();
     float volumeButtonValue = 11.1f;
     float maxVolume = 100.0f;
     double inputSignalVoltageVolts = 0.0;
@@ -394,6 +448,11 @@ struct Amplifier
 
     void changeSource(std::string newSource);
 };
+
+Amplifier::Amplifier()
+{
+    std::cout << "Amplifier being constructed" << std::endl;
+}
 
 void Amplifier::changeVolume(bool up)
 {
@@ -424,16 +483,18 @@ int Amplifier::outputSound()
 void Amplifier::changeSource(std::string newSource)
 {
     sourceSelected = newSource;
+    std::cout << "New source: " << sourceSelected << std::endl;
 }
 
 struct Tuner
 {
+    Tuner();
     std::string bandSelected = "FM";
     float tuningKnobAngleRadians = 1.234f;
     std::string presetButtonPressed = "none";
     float dialPositionMillimeters = 15.3f;
     double antennaSignalVoltageMillivolts = 0.132;
-    float tuning;
+    float tuning = 92.5f;
     
     void selectBand(std::string newBand);
 
@@ -441,6 +502,11 @@ struct Tuner
 
     void lightUp(); 
 };
+
+Tuner::Tuner()
+{
+    std::cout << "Tuner being constructed" << std::endl;
+}
 
 void Tuner::selectBand(std::string newBand)
 {
@@ -467,6 +533,7 @@ void Tuner::lightUp()
 
 struct Speaker
 {
+    Speaker();
     double bassDriverVoltageVolts = 31.43;
     float bassConeDisplacementMillimeters = 2.3f;
     double treebleDriverVoltageVolts = 30.56;
@@ -480,6 +547,11 @@ struct Speaker
     
     bool blow(float driverCurrent);
 };
+
+Speaker::Speaker()
+{
+    std::cout << "Speaker being constructed" << std::endl;
+}
 
 float Speaker::processSignal(float inputSignal)
 {
@@ -502,22 +574,34 @@ bool Speaker::blow(float driverCurrent)
 
 struct Stereo
 {
+    Stereo();
     Turntable turntable;
     CassetteDeck cassetteDeck;
     Amplifier amplifier;
     Tuner tuner;
     Speaker speaker1, speaker2;
+    std::string sourcePlaying;
 
     bool playMusic(std::string source);
 
     void changeRadioChannel(std::string newRadioChannel, bool up);
 
-    bool recordTape(std::string inputSource); 
+    bool recordTape(); 
 };
+
+Stereo::Stereo()
+{
+    std::cout << "Stereo being constructed" << std::endl;
+}
 
 bool Stereo::playMusic(std::string source)
 {
-    return source == "Turntable" || source == "Cassette" || source == "Tuner";
+    if (source == "Turntable" || source == "Cassette" || source == "Tuner")
+    {
+        sourcePlaying = source;    
+        return true;
+    }
+    return false;
 }
 
 void Stereo::changeRadioChannel(std::string newRadioChannel, bool up)
@@ -526,9 +610,9 @@ void Stereo::changeRadioChannel(std::string newRadioChannel, bool up)
     tuner.changeTuning(up);
 }
 
-bool Stereo::recordTape(std::string inputSource)
+bool Stereo::recordTape()
 {
-    if (inputSource == "Turntable" || inputSource == "Tuner")
+    if (sourcePlaying == "Turntable" || sourcePlaying == "Tuner")
     {
         cassetteDeck.rotateReel();
         return true;
@@ -539,8 +623,195 @@ bool Stereo::recordTape(std::string inputSource)
 int main()
 {
     Example::main();
-    
+    // "---" in output indicates call to a member function
+    std::cout << std::endl;
     
     srand(438905280);
+
+    Cat cat;
+    std::cout << std::fixed << std::setprecision(1)
+        << "The cat has " << cat.numLimbs << " limb(s) and " << cat.numTails << " tail(s). It is " << cat.ageYears << " year(s) old. Its colour is " << cat.colour << ". And its cuteness level is " << cat.cutenessLevel << ".\n"
+        << "--- ";
+    cat.meow(42);
+    std::cout
+        << "--- "
+        << "Did the cat catch a fly? " << (cat.catchAnimal("Fly") ? "Yes!" : "No :(") << "\n"
+        << "--- "
+        << "Size of the furball: " << cat.throwUpFurBall() << "mm\n"
+        << std::endl;
+    
+    VendingMachine vendingMachine;
+    std::cout 
+        << "Vending machine on: " << (vendingMachine.isOn ? "Yes" : "No") << "\n"
+        << "Interior temperature: " << vendingMachine.interiorTemperatureCelsius << "°C" << "\n"
+        << "Target temperature: " << vendingMachine.targetTemperatureCelsius << "°C" << "\n"
+        << "--- ";
+    vendingMachine.refrigerate();
+    std::cout << std::setprecision(2) 
+        << "Cash collected: " << vendingMachine.cashCollectedEuros << "€\n" 
+        << "Item selected: " << vendingMachine.itemSelected << "\n"
+        << "--- "
+        << "Charging customer for 5 items: " << vendingMachine.chargeCustomerEuros(vendingMachine.kitkatDispenser, 5) << "€\n"
+        << "*** Dispenser number: " << vendingMachine.kitkatDispenser.itemNumber << "\n"
+        << "*** "
+        << (vendingMachine.kitkatDispenser.isDisabled ? "Disabled" : "Activated") << "\n"
+        << "*** Product: " << vendingMachine.kitkatDispenser.name << "\n"
+        << "*** Flavour: " << vendingMachine.kitkatDispenser.flavour << "\n"
+        << "*** Inventory: " << vendingMachine.kitkatDispenser.inventory << "\n"
+        << "*** Price: " << vendingMachine.kitkatDispenser.priceEuros << "€\n"
+        << "--- "
+        << "Dispensing 5 items: " 
+        << (vendingMachine.dispenseKitkat(5) ? "Yes" : "No") << "\n"
+        << "--- Items distributed\n"
+        << "--- "
+        << "New item dispenser state: " << (vendingMachine.kitkatDispenser.isDisabled ? "Disabled" : "Activated") << "\n";
+    
+    vendingMachine.kitkatDispenser.stockUp(3);
+    std::cout 
+        << "--- "
+        << "New item dispenser inventory: " << vendingMachine.kitkatDispenser.inventory << "\n";
+    std::cout << std::endl;
+    
+    Computer computer;
+    std::cout 
+        << "--- "
+        << "Computer booted: " << (computer.bootUp(computer.cDrive) ? "Yes" : "No") << "\n"
+        << "Number of cores: " << computer.numCPUCores << "\n"
+        << "CPU Frequency: " << computer.CPUFrequencyGHz << "GHz\n"
+        << "RAM: " << computer.memoryMB << "MB\n"
+        << "Power needed: " << computer.powerNeededW << "W\n"
+        << "Operating system: " << computer.operatingSystem << "\n"
+        << "*** Drive brand: " << computer.cDrive.brand << "\n"
+        << "*** Drive capacity: " << computer.cDrive.capacityGB << "GB\n"
+        << "*** Drive RPM: " << computer.cDrive.standardRpm << "\n"
+        << "*** Drive read speed: " << computer.cDrive.readSpeedMBs << "MB/s\n"
+        << "--- "
+        << "*** Data read at address 123: " << computer.cDrive.readData(123) << "\n"
+        << "--- "
+        << "*** Writing data 456 at address 678 successful?: " << (computer.cDrive.writeData(678, 456) ? "Yes" : "No") << "\n"
+        << "--- ";
+    computer.runProgram(computer.cDrive, "/usr/local/games/pacman/pacman");
+    std::cout 
+        << "--- "
+        << "Computer crashed: " << (computer.crash() ? "Yes :(" : "No") << "\n"
+        << "--- ";
+    computer.cDrive.parkHeads();
+    std::cout << std::endl;
+    
+    Motorcycle motorcycle;
+    std::cout 
+        << "Brand: " << motorcycle.brand << "\n"
+        << "Model: " << motorcycle.model << "\n"
+        << "Colour: " << motorcycle.model << "\n"
+        << "Engine power: " << motorcycle.enginePowerHp << "Hp\n"
+        << "Cylinders: " << motorcycle.numCylinders << "\n"
+        << "Speed: " << motorcycle.speedKph << "km/h\n"
+        << "--- ";
+    motorcycle.accelerate(30); 
+    std::cout 
+        << "--- "
+        << (motorcycle.makeWheelie() ? "Wheelieeeee!" : "Try again ;)") << "\n";
+    motorcycle.decelerate(20);
+    std::cout 
+        << "--- "
+        << "New speed: " << motorcycle.speedKph << "km/h\n"
+        << std::endl;  
+    
+    Stereo stereo;
+    std::cout
+        << "*** Turntable:\n"
+        << "PlatterRPM: " << stereo.turntable.platterRpm << "\n"
+        << "Tonearm counterweight: " << stereo.turntable.tonearmCounterweightGrams << "g\n"
+        << "Motor voltage: " << stereo.turntable.motorVoltageVolts << "V\n"
+        << "Stylus movement: " << stereo.turntable.stylusMovementMicrometers << "μm\n"
+        << std::setprecision(0)
+        << "Speed selection: " << stereo.turntable.speedSelection << "rpm\n"
+        << std::setprecision(2)
+        << "--- ";
+    stereo.turntable.changeSpeedSelection(true);
+    std::cout << "--- ";
+    stereo.turntable.rotatePlatter();
+    std::cout
+        << "--- "
+        << "Groove amplitude: " << stereo.turntable.grooveAmplitude() << "\n"
+        << "*** Cassette deck:\n"
+        << (stereo.cassetteDeck.isCompartmentOpen ? "Open" : "Closed") << "\n"
+        << std::setprecision(2)
+        << "Tape speed: " << stereo.cassetteDeck.tapeSpeedCmPerSecond << "cm/s\n"
+        << "--- Rotating reel\n";
+    stereo.cassetteDeck.rotateReel();
+    std::cout
+        << std::setprecision(3)
+        << "Speed coefficient: " << stereo.cassetteDeck.speedCoefficient << "\n"
+        << "Reel speed: " <<  stereo.cassetteDeck.reelSpeed << "rpm\n"
+        << "Play head current: " << stereo.cassetteDeck.playHeadCurrentMilliAmps << "mA\n"
+        << "Button pressed: " << stereo.cassetteDeck.controlButtonPressed << "\n"
+        << "Counter: " << stereo.cassetteDeck.counter << "\n"
+        << (stereo.cassetteDeck.isForward ? "Forward" : "Reverse") << "\n"
+        << "--- ";
+    stereo.cassetteDeck.reverseDirection();
+    std::cout
+        << (stereo.cassetteDeck.isForward ? "Forward" : "Reverse") << "\n"
+        << "--- "
+        << "Magnetic info: " << stereo.cassetteDeck.readMagneticInformation() << "\n"
+        << "*** Amplifier:\n"
+        << std::setprecision(1)
+        << "Volume button: " << stereo.amplifier.volumeButtonValue << "\n"
+        << "Max volume: " << stereo.amplifier.maxVolume << "\n"
+        << "Input signal: " << stereo.amplifier.inputSignalVoltageVolts << "\n"
+        << "Output to speakers: " << stereo.amplifier.speakerOutputVoltageVolts << "\n"
+        << "Source: " << stereo.amplifier.sourceSelected << "\n"
+        << "Equalizer: " << stereo.amplifier.equalizerPreset << "\n"
+        << "--- "
+        << "Sound output: " << stereo.amplifier.outputSound() << "\n"
+        << "--- ";
+    stereo.amplifier.changeSource("Cassette Deck");
+    stereo.amplifier.changeVolume(true);
+    std::cout 
+        << "--- "
+        << "New volume: " << stereo.amplifier.volumeButtonValue << "\n"
+        << "*** Tuner:\n"
+        << "Band: " << stereo.tuner.bandSelected << "\n"
+        << "Turning knob rotation: " << stereo.tuner.tuningKnobAngleRadians << "rad\n"
+        << "Preset: " << stereo.tuner.presetButtonPressed << "\n"
+        << "Dial position: " << stereo.tuner.dialPositionMillimeters << "mm\n"
+        << std::setprecision(3)
+        << "Antenna signal: " << stereo.tuner.antennaSignalVoltageMillivolts << "mV\n"
+        << std::setprecision(1)
+        << "Tuning: " << stereo.tuner.tuning << "\n"
+        << "--- ";
+    stereo.tuner.lightUp();
+    stereo.tuner.selectBand("AM");
+    stereo.tuner.changeTuning(false);
+    std::cout
+        << "--- "
+        << "New band: " << stereo.tuner.bandSelected << "\n"
+        << "--- "
+        << "New tuning: " << stereo.tuner.tuning << "\n"
+        << "*** Speaker 1:\n"
+        << std::setprecision(2)
+        << "Bass driver: " << stereo.speaker1.bassDriverVoltageVolts << "V\n"
+        << "Treeble driver: " << stereo.speaker1.treebleDriverVoltageVolts << "V\n"
+        << "Bass cone displacement: " << stereo.speaker1.bassConeDisplacementMillimeters << "mm\n"
+         << "Treeble cone displacement: " << stereo.speaker1.treebleConeDisplacementMillimeters << "mm\n"
+        << "Vent exhaust: " << stereo.speaker1.ventExhaustOverPressurePa << "Pa\n"
+        << "Max current: " << stereo.speaker1.maxCurrent << "A\n"
+        << std::setprecision(6)
+        << "--- "
+        << "Processed signal: " << stereo.speaker1.processSignal(0.2345f) << "\n"
+        << "--- "
+        << "Sound emitted: " << stereo.speaker1.emitSound(0.21456f) << "\n"
+        << "--- "
+        << "Speaker blown: " << (stereo.speaker1.blow(1.4392f) ? "Yes :(" : "No") << "\n"
+        << "*** Stereo:\n"
+        << "--- "
+        << "Playing music on tuner: " << (stereo.playMusic("Tuner") ? "Yes" : "No") << "\n"
+        << "--- ";
+    stereo.changeRadioChannel("WNYC", true);
+    std::cout 
+        << "--- "
+        << "Recording tape: " << (stereo.recordTape() ? "Yes" : "No") << "\n";
+
+    std::cout << std::endl;
     std::cout << "good to go!" << std::endl;
 }
