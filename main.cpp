@@ -76,6 +76,7 @@ int main()
 
 struct Cat
 {
+    Cat();
     int numLimbs = 3;
     int numTails = 1;
     float ageYears = 3.6f;
@@ -89,6 +90,11 @@ struct Cat
 
     float throwUpFurBall(); 
 };
+
+Cat::Cat()
+{
+    std::cout << "Cat being constructed" << std::endl;
+}
 
 void Cat::meow(int loudnessDB)
 {
@@ -121,6 +127,7 @@ float Cat::throwUpFurBall()
 
 struct VendingMachine
 {
+    VendingMachine();
     bool isOn = true;
     float interiorTemperatureCelsius = 10.2f;
     float targetTemperatureCelsius = 8.5f;
@@ -129,6 +136,7 @@ struct VendingMachine
 
     struct ItemDispenser
     {
+        ItemDispenser();
         std::string name = "KitKat";
         std::string flavour = "Original";
         int inventory = 5;
@@ -143,12 +151,24 @@ struct VendingMachine
         void disable(std::string cause); 
     };
 
+    ItemDispenser kitkatDispenser;
+
     float chargeCustomerEuros(ItemDispenser item, int numberOfItems); 
 
     bool dispenseItem(ItemDispenser itemDispenser, int numberOfItems); 
 
     bool refrigerate();
 };
+
+VendingMachine::VendingMachine()
+{
+    std::cout << "VendingMachine being constructed" << std::endl;
+}
+
+VendingMachine::ItemDispenser::ItemDispenser()
+{
+    std::cout << "VendingMachine::ItemDispenser being constructed" << std::endl;
+}
 
 bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
 {
@@ -201,6 +221,7 @@ bool VendingMachine::refrigerate()
 
 struct Computer
 {
+    Computer();
     int numCPUCores = 6;
     float CPUFrequencyGHz = 3.4f;
     int memoryMB = 32;
@@ -209,6 +230,7 @@ struct Computer
 
     struct Drive 
     {
+        Drive();
         std::string brand = "Seagate";
         float capacityGB = 2000.0f;
         int standardRpm = 7200;
@@ -222,12 +244,24 @@ struct Computer
         bool parkHeads(); 
     };
 
+    Drive cDrive;
+
     bool bootUp(Drive systemDrive); 
 
     bool runProgram(Drive programDrive, std::string path); 
 
     bool crash();    
 };
+
+Computer::Computer()
+{
+    std::cout << "Computer being constructed" << std::endl;
+}
+
+Computer::Drive::Drive()
+{
+    std::cout << "Computer::Drive being constructed" << std::endl;
+}
 
 int Computer::Drive::readData(int address)
 {
@@ -266,6 +300,7 @@ bool Computer::crash()
 
 struct Motorcycle
 {
+    Motorcycle();
     std::string brand = "Harley Davidson";
     std::string model = "2022 Heritage Classic";
     std::string colour = "Pink";
@@ -279,6 +314,11 @@ struct Motorcycle
 
     bool makeWheelie(); 
 };
+
+Motorcycle::Motorcycle()
+{
+    std::cout << "Motorcycle being constructed" << std::endl;
+}
 
 void Motorcycle::accelerate(float acceleration)
 {
@@ -301,6 +341,7 @@ bool Motorcycle::makeWheelie()
 
 struct Turntable
 {
+    Turntable();
     float platterRpm = 32.9f;
     float tonearmCounterweightGrams = 160.0f;
     double motorVoltageVolts = 9.2345;
@@ -313,6 +354,11 @@ struct Turntable
 
     int grooveAmplitude();
 };
+
+Turntable::Turntable()
+{
+    std::cout << "Turntable being constructed" << std::endl;
+}
 
 void Turntable::changeSpeedSelection(bool isIncreased)
 {
@@ -343,6 +389,7 @@ int grooveAmplitude()
 
 struct CassetteDeck
 {
+    CassetteDeck();
     bool isCompartmentOpen = false;
     float tapeSpeedCmPerSecond = 4.76f;
     float reelSpeed;
@@ -358,6 +405,11 @@ struct CassetteDeck
 
     void reverseDirection(); 
 };
+
+CassetteDeck::CassetteDeck()
+{
+    std::cout << "CassetteDeck being constructed" << std::endl;
+}
 
 int CassetteDeck::readMagneticInformation()
 {
@@ -381,6 +433,7 @@ void CassetteDeck::reverseDirection()
 
 struct Amplifier
 {
+    Amplifier();
     float volumeButtonValue = 11.1f;
     float maxVolume = 100.0f;
     double inputSignalVoltageVolts = 0.0;
@@ -394,6 +447,11 @@ struct Amplifier
 
     void changeSource(std::string newSource);
 };
+
+Amplifier::Amplifier()
+{
+    std::cout << "Amplifier being constructed" << std::endl;
+}
 
 void Amplifier::changeVolume(bool up)
 {
@@ -428,6 +486,7 @@ void Amplifier::changeSource(std::string newSource)
 
 struct Tuner
 {
+    Tuner();
     std::string bandSelected = "FM";
     float tuningKnobAngleRadians = 1.234f;
     std::string presetButtonPressed = "none";
@@ -441,6 +500,11 @@ struct Tuner
 
     void lightUp(); 
 };
+
+Tuner::Tuner()
+{
+    std::cout << "Tuner being constructed" << std::endl;
+}
 
 void Tuner::selectBand(std::string newBand)
 {
@@ -467,6 +531,7 @@ void Tuner::lightUp()
 
 struct Speaker
 {
+    Speaker();
     double bassDriverVoltageVolts = 31.43;
     float bassConeDisplacementMillimeters = 2.3f;
     double treebleDriverVoltageVolts = 30.56;
@@ -480,6 +545,11 @@ struct Speaker
     
     bool blow(float driverCurrent);
 };
+
+Speaker::Speaker()
+{
+    std::cout << "Speaker being constructed" << std::endl;
+}
 
 float Speaker::processSignal(float inputSignal)
 {
@@ -502,6 +572,7 @@ bool Speaker::blow(float driverCurrent)
 
 struct Stereo
 {
+    Stereo();
     Turntable turntable;
     CassetteDeck cassetteDeck;
     Amplifier amplifier;
@@ -514,6 +585,11 @@ struct Stereo
 
     bool recordTape(std::string inputSource); 
 };
+
+Stereo::Stereo()
+{
+    std::cout << "Stereo being constructed" << std::endl;
+}
 
 bool Stereo::playMusic(std::string source)
 {
@@ -538,9 +614,14 @@ bool Stereo::recordTape(std::string inputSource)
 
 int main()
 {
-    Example::main();
-    
-    
+    // Example::main();
     srand(438905280);
+
+    Cat cat;
+    VendingMachine vendingMachine;
+    Computer computer;
+    Motorcycle motorcycle;
+    Stereo stereo;
+    
     std::cout << "good to go!" << std::endl;
 }
