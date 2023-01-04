@@ -16,6 +16,7 @@
  */
 
 #include <iostream>
+#include <iomanip>
 namespace Example 
 {
 struct UDT  
@@ -59,7 +60,13 @@ struct Cat
     float throwUpFurBall(); 
 };
 
-Cat::Cat()
+Cat::Cat() :
+numLimbs(3),
+numTails(1),
+ageYears(3.6f),
+colour("orange"),
+weightKg(4.1f),
+cutenessLevel(50)
 {
     std::cout << "Cat being constructed" << std::endl;
 }
@@ -134,7 +141,13 @@ VendingMachine::VendingMachine()
     std::cout << "VendingMachine being constructed" << std::endl;
 }
 
-VendingMachine::ItemDispenser::ItemDispenser()
+VendingMachine::ItemDispenser::ItemDispenser() :
+name("KitKat"),
+flavour("Original"),
+inventory(5),
+priceEuros(2.5f),
+itemNumber(13),
+isDisabled(false)
 {
     std::cout << "VendingMachine::ItemDispenser being constructed" << std::endl;
 }
@@ -274,7 +287,7 @@ struct Motorcycle
     std::string colour = "Pink";
     int enginePowerHp = 101;
     int numCylinders = 2;
-    float speedKph = 0.0f; 
+    float speedKph; 
 
     void accelerate(float acceleration); 
 
@@ -283,7 +296,8 @@ struct Motorcycle
     bool makeWheelie(); 
 };
 
-Motorcycle::Motorcycle()
+Motorcycle::Motorcycle() :
+speedKph(10)
 {
     std::cout << "Motorcycle being constructed" << std::endl;
 }
