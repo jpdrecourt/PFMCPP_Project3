@@ -74,6 +74,7 @@ cutenessLevel(50)
 void Cat::meow(int loudnessDB)
 {
     std::cout << "Meow!!!" << std::endl;
+    std::cout << "My current cuteness level is " << cutenessLevel << std::endl;
     if (loudnessDB < 30)
     {
         cutenessLevel += 10;
@@ -82,6 +83,7 @@ void Cat::meow(int loudnessDB)
     {
         cutenessLevel -= loudnessDB;        
     }
+   
 }
 
 bool Cat::catchAnimal(std::string animalSpecies)
@@ -304,17 +306,20 @@ speedKph(10)
 
 void Motorcycle::accelerate(float acceleration)
 {
+    std::cout << "Original speed is: " << speedKph << "km/h\n";
     speedKph += acceleration;
     std::cout << "New speed is: " << speedKph << "km/h\n";
 }
 
 void Motorcycle::decelerate(float deceleration) 
 {
+    std::cout << "Original speed is: " << speedKph << "km/h\n";
     speedKph -= deceleration;
     if (speedKph < 0)
     {
         speedKph = 0;
     }
+    std::cout << "New speed is: " << speedKph << "km/h\n";
 }
 
 bool Motorcycle::makeWheelie() 
@@ -683,7 +688,7 @@ int main()
     std::cout 
         << "Brand: " << motorcycle.brand << "\n"
         << "Model: " << motorcycle.model << "\n"
-        << "Colour: " << motorcycle.model << "\n"
+        << "Colour: " << motorcycle.colour << "\n"
         << "Engine power: " << motorcycle.enginePowerHp << "Hp\n"
         << "Cylinders: " << motorcycle.numCylinders << "\n"
         << "Speed: " << motorcycle.speedKph << "km/h\n"
@@ -691,11 +696,10 @@ int main()
     motorcycle.accelerate(30); 
     std::cout 
         << "--- "
-        << (motorcycle.makeWheelie() ? "Wheelieeeee!" : "Try again ;)") << "\n";
+        << (motorcycle.makeWheelie() ? "Wheelieeeee!" : "Try again ;)") << "\n"
+        << "--- ";
     motorcycle.decelerate(20);
     std::cout 
-        << "--- "
-        << "New speed: " << motorcycle.speedKph << "km/h\n"
         << std::endl;  
     
     Stereo stereo;
