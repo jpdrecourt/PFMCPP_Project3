@@ -33,6 +33,7 @@ Create a branch named Part5
  */
 
 #include <iostream>
+#include <iomanip>
 namespace Example 
 {
 struct Bar 
@@ -76,18 +77,21 @@ int main()
 struct Cat
 {
     Cat();
-    int numLimbs = 3;
-    int numTails = 1;
-    float ageYears = 3.6f;
-    std::string colour = "orange";
-    float weightKg = 4.1f;
-    int cutenessLevel= 50;
+    int numLimbs;
+    int numTails;
+    float ageYears;
+    std::string colour;
+    float weightKg;
+    int cutenessLevel;
+    int maxCroquettes;
 
     void meow(int loudnessDB);
 
     bool catchAnimal(std::string animalSpecies); 
 
     float throwUpFurBall(); 
+
+    int eatCroquettes(int croquettesNum, float croquetteWeight);
 };
 
 Cat::Cat() :
@@ -96,7 +100,8 @@ numTails(1),
 ageYears(3.6f),
 colour("orange"),
 weightKg(4.1f),
-cutenessLevel(50)
+cutenessLevel(50),
+maxCroquettes(7)
 {
     std::cout << "Cat being constructed" << std::endl;
 }
@@ -131,6 +136,23 @@ float Cat::throwUpFurBall()
 {
     cutenessLevel -= 50;
     return weightKg * 11;
+}
+
+int Cat::eatCroquettes(int croquettesNum, float croquetteWeightG)
+{
+    int i = 0;
+    while (i < croquettesNum)
+    {
+        ++i;
+        weightKg += croquetteWeightG * 0.001f;
+        std::cout << "Eating a croquette... yum!\n";
+        if (i >= maxCroquettes) 
+        {
+            std::cout << "I had enough.\n";
+            return croquettesNum - i;
+        }
+    }
+    return 0;
 }
 
 struct VendingMachine
@@ -186,21 +208,23 @@ isDisabled(false)
 
 bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
 {
-    if (inventory >= numberOfItems)
+    for (int i = 0; i < numberOfItems; ++i)
     {
-        inventory -= numberOfItems;
-        if (inventory == 0)
+        std::cout << "Distributing item\n";
+        --inventory;
+        if (inventory == 0) 
         {
-            disable("Empty"); 
+            disable("Empty");
+            return (++i == numberOfItems);
         }
-        return true;
     }
-    return false;
+    return true;
 }
 
 void VendingMachine::ItemDispenser::stockUp(int itemsAdded)
 {
     inventory += itemsAdded;
+    isDisabled = false;
 }
 
 void VendingMachine::ItemDispenser::disable(std::string cause)
@@ -224,6 +248,7 @@ float VendingMachine::chargeCustomerEuros(ItemDispenser item, int numberOfItems)
 
 bool VendingMachine::dispenseKitkat(int numberOfItems)
 {
+    std::cout << "Attempt at dispensing " << numberOfItems << " items\n";
     return kitkatDispenser.distributeItems(numberOfItems);
 }
 
@@ -368,7 +393,7 @@ struct Turntable
 
     void changeSpeedSelection(bool isIncreased); 
 
-    void rotatePlatter(); 
+    void regulateSpeed(); 
 
     int grooveAmplitude();
 };
@@ -389,16 +414,18 @@ void Turntable::changeSpeedSelection(bool isIncreased)
         speedSelection = 33.0f;
     }
     std::cout << "New Speed selection: " << speedSelection << "rpm\n";
+    regulateSpeed();
 }
 
-void Turntable::rotatePlatter()
+void Turntable::regulateSpeed()
 {
-    float speedDifference = platterRpm - speedSelection;
-    if (std::abs(speedDifference) > 0.05f)
+    while (true)
     {
-        platterRpm -= 0.1f*(speedDifference);
+        float speedDifference = speedSelection - platterRpm;
+        if (std::abs(speedDifference) < 0.05f) return;
+        platterRpm += 0.5f * speedDifference;
+        std::cout << "New platter speed: " << platterRpm << "rpm" << std::endl;        
     }
-    std::cout << "New platter speed: " << platterRpm << "rpm" << std::endl;
 }
 
 int Turntable::grooveAmplitude()
@@ -511,12 +538,14 @@ struct Tuner
     float dialPositionMillimeters = 15.3f;
     double antennaSignalVoltageMillivolts = 0.132;
     float tuning = 92.5f;
+    float tuningDelta = 0.1f;
     
     void selectBand(std::string newBand);
 
     void changeTuning(bool up); 
 
-    void lightUp(); 
+    void lightUp();
+
 };
 
 Tuner::Tuner()
@@ -530,8 +559,7 @@ void Tuner::selectBand(std::string newBand)
 }
 
 void Tuner::changeTuning(bool up)
-{   // TODO Tuning and tuning limits for various bands
-    float tuningDelta = 1;
+{   
     if (up)
     {
         tuning += tuningDelta;
@@ -647,6 +675,8 @@ int main()
     Cat cat;
     std::cout << std::fixed << std::setprecision(1)
         << "The cat has " << cat.numLimbs << " limb(s) and " << cat.numTails << " tail(s). It is " << cat.ageYears << " year(s) old. Its colour is " << cat.colour << ". And its cuteness level is " << cat.cutenessLevel << ".\n"
+        << "Cat weight: " << cat.weightKg << "kg\n"
+        << "Max croquettes eaten in one sitting: " << cat.maxCroquettes << "\n"
         << "--- ";
     cat.meow(42);
     std::cout
@@ -654,10 +684,15 @@ int main()
         << "Did the cat catch a fly? " << (cat.catchAnimal("Fly") ? "Yes!" : "No :(") << "\n"
         << "--- "
         << "Size of the furball: " << cat.throwUpFurBall() << "mm\n"
+        << "--- Attempting to eat 11 croquettes in bowl\n"
+        << cat.eatCroquettes(11, 1) << " croquette(s) left in bowl\n"
+        << std::setprecision(3)
+        << "Cat new weight: " << cat.weightKg << "\n"
         << std::endl;
     
     VendingMachine vendingMachine;
     std::cout 
+        << std::setprecision(1)
         << "Vending machine on: " << (vendingMachine.isOn ? "Yes" : "No") << "\n"
         << "Interior temperature: " << vendingMachine.interiorTemperatureCelsius << "°C" << "\n"
         << "Target temperature: " << vendingMachine.targetTemperatureCelsius << "°C" << "\n"
@@ -676,14 +711,17 @@ int main()
         << "*** Inventory: " << vendingMachine.kitkatDispenser.inventory << "\n"
         << "*** Price: " << vendingMachine.kitkatDispenser.priceEuros << "€\n"
         << "--- "
-        << "Dispensing 5 items: " 
-        << (vendingMachine.dispenseKitkat(5) ? "Yes" : "No") << "\n"
-        << "--- Items distributed\n"
+        << (vendingMachine.dispenseKitkat(6) ? "Successfully" : "Unsuccessfully") << " dispensed\n"
         << "--- "
         << "New item dispenser state: " << (vendingMachine.kitkatDispenser.isDisabled ? "Disabled" : "Activated") << "\n";
     
     vendingMachine.kitkatDispenser.stockUp(3);
     std::cout 
+        << "--- "
+        << "New item dispenser inventory: " << vendingMachine.kitkatDispenser.inventory << "\n"
+        << "New item dispenser state: " << (vendingMachine.kitkatDispenser.isDisabled ? "Disabled" : "Activated") << "\n"
+        << "--- "
+        << (vendingMachine.dispenseKitkat(2) ? "Successfully" : "Unsuccessfully") << " dispensed\n"
         << "--- "
         << "New item dispenser inventory: " << vendingMachine.kitkatDispenser.inventory << "\n";
     std::cout << std::endl;
@@ -744,8 +782,10 @@ int main()
         << std::setprecision(2)
         << "--- ";
     stereo.turntable.changeSpeedSelection(true);
+    stereo.turntable.regulateSpeed();
     std::cout << "--- ";
-    stereo.turntable.rotatePlatter();
+    stereo.turntable.changeSpeedSelection(false);
+    stereo.turntable.regulateSpeed();
     std::cout
         << "--- "
         << "Groove amplitude: " << stereo.turntable.grooveAmplitude() << "\n"
