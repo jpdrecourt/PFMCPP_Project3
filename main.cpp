@@ -16,6 +16,7 @@
  */
 
 #include <iostream>
+#include <iomanip>
 namespace Example 
 {
 struct UDT  
@@ -59,7 +60,13 @@ struct Cat
     float throwUpFurBall(); 
 };
 
-Cat::Cat()
+Cat::Cat() :
+numLimbs(3),
+numTails(1),
+ageYears(3.6f),
+colour("orange"),
+weightKg(4.1f),
+cutenessLevel(50)
 {
     std::cout << "Cat being constructed" << std::endl;
 }
@@ -67,6 +74,7 @@ Cat::Cat()
 void Cat::meow(int loudnessDB)
 {
     std::cout << "Meow!!!" << std::endl;
+    std::cout << "My current cuteness level is " << cutenessLevel << std::endl;
     if (loudnessDB < 30)
     {
         cutenessLevel += 10;
@@ -75,6 +83,7 @@ void Cat::meow(int loudnessDB)
     {
         cutenessLevel -= loudnessDB;        
     }
+   
 }
 
 bool Cat::catchAnimal(std::string animalSpecies)
@@ -134,7 +143,13 @@ VendingMachine::VendingMachine()
     std::cout << "VendingMachine being constructed" << std::endl;
 }
 
-VendingMachine::ItemDispenser::ItemDispenser()
+VendingMachine::ItemDispenser::ItemDispenser() :
+name("KitKat"),
+flavour("Original"),
+inventory(5),
+priceEuros(2.5f),
+itemNumber(13),
+isDisabled(false)
 {
     std::cout << "VendingMachine::ItemDispenser being constructed" << std::endl;
 }
@@ -274,7 +289,7 @@ struct Motorcycle
     std::string colour = "Pink";
     int enginePowerHp = 101;
     int numCylinders = 2;
-    float speedKph = 0.0f; 
+    float speedKph; 
 
     void accelerate(float acceleration); 
 
@@ -283,24 +298,28 @@ struct Motorcycle
     bool makeWheelie(); 
 };
 
-Motorcycle::Motorcycle()
+Motorcycle::Motorcycle() :
+speedKph(10)
 {
     std::cout << "Motorcycle being constructed" << std::endl;
 }
 
 void Motorcycle::accelerate(float acceleration)
 {
+    std::cout << "Original speed is: " << speedKph << "km/h\n";
     speedKph += acceleration;
     std::cout << "New speed is: " << speedKph << "km/h\n";
 }
 
 void Motorcycle::decelerate(float deceleration) 
 {
+    std::cout << "Original speed is: " << speedKph << "km/h\n";
     speedKph -= deceleration;
     if (speedKph < 0)
     {
         speedKph = 0;
     }
+    std::cout << "New speed is: " << speedKph << "km/h\n";
 }
 
 bool Motorcycle::makeWheelie() 
@@ -669,7 +688,7 @@ int main()
     std::cout 
         << "Brand: " << motorcycle.brand << "\n"
         << "Model: " << motorcycle.model << "\n"
-        << "Colour: " << motorcycle.model << "\n"
+        << "Colour: " << motorcycle.colour << "\n"
         << "Engine power: " << motorcycle.enginePowerHp << "Hp\n"
         << "Cylinders: " << motorcycle.numCylinders << "\n"
         << "Speed: " << motorcycle.speedKph << "km/h\n"
@@ -677,11 +696,10 @@ int main()
     motorcycle.accelerate(30); 
     std::cout 
         << "--- "
-        << (motorcycle.makeWheelie() ? "Wheelieeeee!" : "Try again ;)") << "\n";
+        << (motorcycle.makeWheelie() ? "Wheelieeeee!" : "Try again ;)") << "\n"
+        << "--- ";
     motorcycle.decelerate(20);
     std::cout 
-        << "--- "
-        << "New speed: " << motorcycle.speedKph << "km/h\n"
         << std::endl;  
     
     Stereo stereo;
