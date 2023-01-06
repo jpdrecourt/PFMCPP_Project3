@@ -215,7 +215,8 @@ bool VendingMachine::ItemDispenser::distributeItems(int numberOfItems)
         if (inventory == 0) 
         {
             disable("Empty");
-            return (++i == numberOfItems);
+            ++i;
+            return (i == numberOfItems);
         }
     }
     return true;
@@ -422,7 +423,10 @@ void Turntable::regulateSpeed()
     while (true)
     {
         float speedDifference = speedSelection - platterRpm;
-        if (std::abs(speedDifference) < 0.05f) return;
+        if (std::abs(speedDifference) < 0.05f) 
+        {
+            return;
+        }
         platterRpm += 0.5f * speedDifference;
         std::cout << "New platter speed: " << platterRpm << "rpm" << std::endl;        
     }
